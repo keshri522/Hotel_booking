@@ -3,6 +3,7 @@ const express = require("express");
 // simply use router to handle all the routes
 const router = express.Router();
 // impoting the controllers
-const register = require("../controllers/register");
+const { register, login } = require("../controllers/auth");
 router.post("/register", register);
+router.post("/login", login);
 module.exports = router;

@@ -100,7 +100,7 @@ const RegisterForm = ({
           onClick={hanldeRoute}
           required
         >
-          Dont't have account
+          already have account
         </label>
       </div>
     </div>
