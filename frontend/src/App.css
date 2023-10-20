@@ -1,3 +1,15 @@
 .nav-link {
-  color: white;
+  color: #6c5ce7;
+  font-weight: bold;
+}
+.images {
+  background-color: #dfe6e9;
+  box-shadow: 0 0 3px 1px#dfe6e9;
+}
+.form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+.form-control:hover {
+  border: 1px solid #6c5ce7;
 }
