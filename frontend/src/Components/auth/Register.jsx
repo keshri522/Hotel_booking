@@ -1,28 +1,89 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 import RegisterForm from "../Froms/Registerfrom"; // Register form components
 const Register = () => {
   const navigate = useNavigate();
   // for the state of the componets
-  const [fromData, SetformData] = useState({
+  const [formData, SetformData] = useState({
     name: "",
     email: "",
     password: "",
     cpassword: "",
   });
-  // function for button
-  const handleClikc = (e) => {
+  // this is the state to show the spinner when signup
+  const [spinner, Setspinner] = useState(false);
+  const [reset, Setreset] = useState(false);
+  // function for button on click making async this is asynchronus call
+  const handleClikc = async (e) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const passwordRegex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
     e.preventDefault();
-    // now Setting the fields to empty
-    //' making api call here
+    try {
+      if (
+        formData.name.length === 0 ||
+        formData.email.length === 0 ||
+        formData.password.length === 0 ||
+        formData.cpassword.length === 0
+      ) {
+        toast.error("Please fill all the fields");
+        return;
+      }
+      // this is for the email format validation
+      if (!emailRegex.test(formData.email)) {
+        toast.error("Invalid email format");
+        return;
+      }
+      // this is for password check validation
+      if (!passwordRegex.test(formData.password)) {
+        toast.error(
+          "Password should be at least 6 characters long and include at least one letter, one number, and one special character"
+        );
+        return;
+      }
+      // matches both passwords arre same then only go
+      if (formData.password !== formData.cpassword) {
+        toast.error("Password and confirm Password should be same");
+        return;
+      }
+      // the perform api request after validation
+      Setspinner(true);
+      let data = await axios.post("http://localhost:4000/api/register", {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        cpassword: formData.cpassword,
+      });
+      console.log(data);
+      if (data.status === 200) {
+        setTimeout(() => {
+          // navigate("/login");
+          Setspinner(false);
+          toast.success("Register Sucessfully");
+        }, 3000);
+      }
+      // setting the response  then redircts to login page once i got the response
+    } catch (error) {
+      Setspinner(false);
+      console.log(error);
+    }
   };
   const handleReset = () => {
-    SetformData({
-      name: "",
-      email: "",
-      password: "",
-      cpassword: "",
-    });
+    Setreset(true);
+    // using settime out to show effects
+    setTimeout(() => {
+      SetformData({
+        name: "",
+        email: "",
+        password: "",
+        cpassword: "",
+      });
+      toast.success("Reset Sucessfull");
+      Setreset(false);
+    }, 1000);
   };
   // this function will track the inputs that user enters
   const handleChange = (e) => {
@@ -64,9 +125,11 @@ const Register = () => {
               handleChange={handleChange}
               handleClikc={handleClikc}
               handleReset={handleReset}
-              fromData={fromData}
+              formData={formData}
               SetformData={SetformData}
               hanldeRoute={hanldeRoute}
+              spinner={spinner}
+              reset={reset}
             ></RegisterForm>
           </div>
         </div>

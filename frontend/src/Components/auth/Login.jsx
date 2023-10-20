@@ -12,7 +12,6 @@ const Login = () => {
     e.preventDefault();
     // now Setting the fields to empty
     //' making api call here
-    alert("hello");
   };
 
   // this function will track the inputs that user enters

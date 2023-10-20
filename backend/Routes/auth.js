@@ -3,7 +3,6 @@ const express = require("express");
 // simply use router to handle all the routes
 const router = express.Router();
 // impoting the controllers
-const First = require("../controllers/first");
-router.get("/:message", First);
-
+const register = require("../controllers/register");
+router.post("/register", register);
 module.exports = router;
