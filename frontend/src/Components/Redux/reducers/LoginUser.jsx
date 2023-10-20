@@ -5,12 +5,10 @@ const UserReducer = createSlice({
   name: "userLogin",
   reducers: {
     loggedInUser: (state, action) => {
-      console.log("Action Payload:", action.payload);
       return action.payload;
     },
     loggedOutUser: (state, action) => {
-      console.log("Action Payload:", action.payload);
-      return action.payload;
+      return null;
     },
   },
 });

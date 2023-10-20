@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 const Nav = () => {
   return (
-    <nav className="nav bg-light d-flex justify-content-between">
+    <nav className="nav bg-secondary d-flex justify-content-evenly">
       <Link className="nav-link" to="/">
         Home
       </Link>
