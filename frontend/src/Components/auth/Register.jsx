@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import RegisterForm from "../Froms/Registerfrom"; // Register form components
 const Register = () => {
   const navigate = useNavigate();
   // for the state of the componets
@@ -36,73 +37,7 @@ const Register = () => {
     navigate("/login");
   };
   // creating a function which will show the Register form
-  const RegisterForm = () => {
-    return (
-      <div>
-        <div className="form-floating mb-3 ">
-          <input
-            type="text"
-            name="name"
-            value={fromData.name}
-            className="form-control"
-            placeholder="Enter your name"
-            onChange={handleChange}
-          />
-          <label htmlFor="floatingPassword">Name</label>
-        </div>
-        <div className="form-floating mb-3">
-          <input
-            type="email"
-            name="email"
-            value={fromData.email}
-            className="form-control"
-            id="floatingInput"
-            placeholder="Enter your email"
-            onChange={handleChange}
-          />
-          <label htmlFor="floatingInput">Email address</label>
-        </div>
-        <div className="form-floating mb-3">
-          <input
-            type="password"
-            name="password"
-            value={fromData.password}
-            className="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-            onChange={handleChange}
-          />
-          <label htmlFor="floatingPassword">Password</label>
-        </div>
-        <div className="form-floating mb-3">
-          <input
-            type="password"
-            name="cpassword"
-            value={fromData.cpassword}
-            className="form-control"
-            placeholder="Confirm Password"
-            onChange={handleChange}
-          />
-          <label htmlFor="floatingPassword">Confirm Password</label>
-        </div>
-        <div className="d-flex justify-content-between">
-          <button className="btn btn-primary mt-2" onClick={handleClikc}>
-            Submit
-          </button>
-          <button className="btn btn-danger mt-2" onClick={handleReset}>
-            Reset
-          </button>
-          <label
-            type="button"
-            className=" mt-2 text-primary font-weight-bold"
-            onClick={hanldeRoute}
-          >
-            Dont't have account
-          </label>
-        </div>
-      </div>
-    );
-  };
+
   return (
     <>
       <div
@@ -123,7 +58,17 @@ const Register = () => {
               alt=""
             />
           </div>
-          <div className="col-md-6">{RegisterForm()}</div>
+          <div className="col-md-6">
+            {/* passing props to components */}
+            <RegisterForm
+              handleChange={handleChange}
+              handleClikc={handleClikc}
+              handleReset={handleReset}
+              fromData={fromData}
+              SetformData={SetformData}
+              hanldeRoute={hanldeRoute}
+            ></RegisterForm>
+          </div>
         </div>
       </div>
     </>

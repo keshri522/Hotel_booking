@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import LoginForm from "../Froms/LoginForm";
 const Login = () => {
   // for the state of the componets
   const [fromData, SetformData] = useState({
@@ -12,6 +12,7 @@ const Login = () => {
     e.preventDefault();
     // now Setting the fields to empty
     //' making api call here
+    alert("hello");
   };
 
   // this function will track the inputs that user enters
@@ -23,51 +24,7 @@ const Login = () => {
     }));
   };
   // creating a function which will show the Register form
-  const LoginForm = () => {
-    return (
-      <div>
-        <div className="form-floating mb-3 ">
-          <input
-            type="text"
-            name="name"
-            value={fromData.name}
-            className="form-control"
-            placeholder="Enter your name"
-            onChange={handleChange}
-          />
-          <label htmlFor="floatingPassword">Name</label>
-        </div>
-        <div className="form-floating mb-3">
-          <input
-            type="email"
-            name="email"
-            value={fromData.email}
-            className="form-control"
-            id="floatingInput"
-            placeholder="Enter your email"
-            onChange={handleChange}
-          />
-          <label htmlFor="floatingInput">Email address</label>
-        </div>
-        <div className="form-floating mb-3">
-          <input
-            type="password"
-            name="password"
-            value={fromData.password}
-            className="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-            onChange={handleChange}
-          />
-          <label htmlFor="floatingPassword">Password</label>
-        </div>
 
-        <button className="btn btn-primary mt-2" onClick={handleClikc}>
-          Submit
-        </button>
-      </div>
-    );
-  };
   return (
     <>
       <div
@@ -78,7 +35,7 @@ const Login = () => {
           Welcome to Login
         </h1>
       </div>
-      <div className="container mt-4 ">
+      <div className="container mt-5">
         <div className="row">
           <div className="col-md-6">
             <img
@@ -87,7 +44,14 @@ const Login = () => {
               alt="Hi images"
             />
           </div>
-          <div className="col-md-6">{LoginForm()}</div>
+          <div className="col-md-6">
+            <LoginForm
+              handleChange={handleChange}
+              handleClikc={handleClikc}
+              fromData={fromData}
+              SetformData={SetformData}
+            ></LoginForm>
+          </div>
         </div>
       </div>
     </>
