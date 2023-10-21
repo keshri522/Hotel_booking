@@ -4,6 +4,7 @@ import axios from "axios";
 import CryptoJS from "crypto-js";
 import { toast } from "react-toastify";
 import RegisterForm from "../Froms/Registerfrom"; // Register form components
+
 const Register = () => {
   const navigate = useNavigate();
   // for the state of the componets

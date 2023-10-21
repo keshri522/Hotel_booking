@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+const GetDatFromLocalStorage = () => {
+  let data = localStorage.getItem("LoginUser");
+  if (data) {
+    return JSON.parse(data);
+  } else {
+    return null;
+  }
+};
 const UserReducer = createSlice({
-  initialState: null,
+  initialState: GetDatFromLocalStorage(),
   name: "userLogin",
   reducers: {
     loggedInUser: (state, action) => {

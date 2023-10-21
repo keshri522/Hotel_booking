@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const User = require("../Modal/User");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv").config();
 const register = async (req, res) => {
   const { name, email, password, cpassword } = req.body;
   try {
@@ -43,9 +45,45 @@ const register = async (req, res) => {
   }
 };
 
-const login = (req, res) => {
+const login = async (req, res) => {
+  console.log(process.env.JWTSECRET);
   // console.log(req.body);
-  res.status(200).send("login done");
+
+  // then sent a jwt token to user
+  try {
+    // need to verufy the email address and password
+    const { email, password } = req.body;
+    // first need to check the email;
+    const UserEmail = await User.findOne({ email: email });
+
+    if (!UserEmail) {
+      return res.status(400).send("User not find");
+    }
+    // if find then go for password check using bcrypt
+    const ConfirmPassword = await bcrypt.compare(password, UserEmail.password);
+
+    if (!ConfirmPassword) {
+      return res.status(400).send("Password not found");
+    }
+
+    // then need to provide the jwt token
+    let token = jwt.sign({ _id: UserEmail._id }, process.env.JWTSECRET, {
+      expiresIn: "7d",
+    });
+
+    res.status(200).json({
+      token,
+      User: {
+        _id: UserEmail._id,
+        name: UserEmail.name,
+        email: UserEmail.email,
+        createdAt: UserEmail.createdAt,
+        updatedAt: UserEmail.updatedAt,
+      },
+    });
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
 
 module.exports = {

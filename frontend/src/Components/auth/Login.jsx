@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import LoginForm from "../Froms/LoginForm";
 import { toast } from "react-toastify";
 import axios from "axios";
+import CryptoJS from "crypto-js";
+import { loggedInUser } from "../Redux/reducers/LoginUser";
+
+import { useDispatch } from "react-redux";
 const Login = () => {
+  const dispatch = useDispatch();
   // for the state of the componets
   const [formData, SetformData] = useState({
     name: "",
@@ -41,29 +46,40 @@ const Login = () => {
         );
         return;
       }
-
+      const hashpassword = CryptoJS.SHA256(formData.password).toString(); // hasing the real passowrd
       // the perform api request after validation
       Setspinner(true);
-      let data = await axios.post(
+      let res = await axios.post(
         `${process.env.REACT_APP_REACT_API_URL}/login`,
         {
           name: formData.name,
           email: formData.email,
-          password: formData.password,
+          password: hashpassword,
         }
       );
-      console.log(data);
-      if (data.status === 200) {
+      console.log(res);
+      // sending the res to local strogage to persist the data while refreshing
+      localStorage.setItem("LoginUser", JSON.stringify(res.data));
+
+      dispatch(loggedInUser(res.data));
+      // add this res.data to reducx as well as local stroage then redirects
+      if (res.status === 200) {
         setTimeout(() => {
           // navigate("/login");
           Setspinner(false);
           toast.success("Login Sucessfully");
-        }, 2000);
+        }, 1000);
       }
       // setting the response  then redircts to login page once i got the response
     } catch (error) {
-      Setspinner(false);
-      console.log(error);
+      if (error && error.response && error.response.status === 400) {
+        setTimeout(() => {
+          toast.error(`${error.response.data}`);
+          Setspinner(false);
+        }, 1000);
+      }
+
+      // console.log(error);
     }
   };
 
