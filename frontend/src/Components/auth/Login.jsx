@@ -4,9 +4,10 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import CryptoJS from "crypto-js";
 import { loggedInUser } from "../Redux/reducers/LoginUser";
-
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // for the state of the componets
   const [formData, SetformData] = useState({
@@ -61,7 +62,6 @@ const Login = () => {
 
       if (res.status === 200) {
         setTimeout(() => {
-          // navigate("/login");
           Setspinner(false);
           // sending the res to local strogage to persist the data while refreshing
           localStorage.setItem("LoginUser", JSON.stringify(res.data));
@@ -69,6 +69,7 @@ const Login = () => {
           dispatch(loggedInUser(res.data));
           // add this res.data to reducx as well as local stroage then redirects
           toast.success("Login Sucessfully");
+          navigate("/dashboard");
         }, 1000);
       }
       // setting the response  then redircts to login page once i got the response
