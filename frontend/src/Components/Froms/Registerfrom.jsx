@@ -68,7 +68,7 @@ const RegisterForm = ({
           Confirm Password<span className="text-danger">*</span>
         </label>
       </div>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between flex-column flex-sm-row">
         {spinner ? (
           <Spinner></Spinner>
         ) : (
@@ -76,6 +76,7 @@ const RegisterForm = ({
             Singup
           </button>
         )}
+
         {/* conditioal rendering of buttons */}
         {reset ? (
           <Spinner></Spinner>
@@ -96,7 +97,7 @@ const RegisterForm = ({
 
         <label
           type="button"
-          className=" mt-2 text-primary font-weight-bold tt"
+          className="mt-2 text-primary font-weight-bold tt"
           onClick={hanldeRoute}
           required
         >

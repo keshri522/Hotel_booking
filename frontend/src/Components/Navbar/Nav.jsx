@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loggedOutUser } from "../Redux/reducers/LoginUser";
 const Nav = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const UserData = useSelector((state) => state.rootReducers.userLogin);
   // console.log(UserData);
   return (
@@ -11,7 +14,16 @@ const Nav = () => {
         Home
       </Link>
       {UserData && UserData.User && UserData.User.email ? (
-        <Link className="nav-link" to="/Login">
+        <Link
+          to="/"
+          className="nav-link"
+          onClick={() => {
+            // need to remove the local storage and redux as well then redirects to home page
+            localStorage.removeItem("LoginUser");
+            dispatch(loggedOutUser(""));
+            // navigating to desired page
+          }}
+        >
           Logout
         </Link>
       ) : (

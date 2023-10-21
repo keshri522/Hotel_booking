@@ -50,22 +50,22 @@ const LoginForm = ({ formData, handleChange, handleClikc, spinner }) => {
           </label>
         </div>
         {/* condtional rendering of button  */}
-        <div className="d-flex justify-content-between">
+        <div className="d-flex flex-column justify-content-between">
           {spinner ? (
             <Spinner></Spinner>
           ) : (
-            <button className="btn btn-primary mt-2" onClick={handleClikc}>
+            <button className="btn btn-primary mt-2 mb-2" onClick={handleClikc}>
               Login
             </button>
           )}
           <label
             type="button"
-            className=" mt-2 tt"
+            className="mt-2 tt"
             onClick={() => {
               navigate("/register");
             }}
           >
-            Donn't have account
+            Don't have an account
           </label>
         </div>
       </div>

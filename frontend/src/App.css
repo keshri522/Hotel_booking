@@ -51,3 +51,22 @@
 .tt:hover {
   transform: scale(1.1);
 }
+@media (max-width: 320px) {
+  .d-flex.flex-column.flex-sm-row {
+    flex-direction: column;
+  }
+
+  .d-flex.flex-column.flex-sm-row > * {
+    width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .d-flex.flex-column.justify-content-between {
+    flex-direction: column;
+  }
+
+  .d-flex.flex-column.justify-content-between > * {
+    width: 100%;
+  }
+}

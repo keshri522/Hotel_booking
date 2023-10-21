@@ -70,10 +70,10 @@ const Register = () => {
 
       if (data.status === 200) {
         setTimeout(() => {
-          // navigate("/login");
           Setspinner(false);
           toast.success("Register Sucessfully");
-        }, 200);
+          navigate("/login");
+        }, 2000);
       }
       // setting the response  then redircts to login page once i got the response
     } catch (error) {
@@ -119,13 +119,15 @@ const Register = () => {
     <>
       <div
         style={{ backgroundColor: "#833471" }}
-        className="container-fluid mt-3   p-3 text-center"
+        className="container-fluid mt-3 p-3 text-center "
       >
-        <h1 className="text-white" style={{ textShadow: "2px  2px black" }}>
-          {" "}
-          User Registration
-        </h1>
+        <div className="col-md-12">
+          <h1 className="text-white" style={{ textShadow: "2px 2px black" }}>
+            User Registration
+          </h1>
+        </div>
       </div>
+
       <div className="container mt-4 ">
         <div className="row">
           <div className="col-md-6">
