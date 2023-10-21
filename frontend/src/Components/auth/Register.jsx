@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import CryptoJS from "crypto-js";
 import { toast } from "react-toastify";
 import RegisterForm from "../Froms/Registerfrom"; // Register form components
 const Register = () => {
@@ -50,12 +51,15 @@ const Register = () => {
         return;
       }
       // the perform api request after validation
+      // this will hash the password so no can see in payload
+      const hashedPassword = CryptoJS.SHA256(formData.password).toString();
+      const chashedPassword = CryptoJS.SHA256(formData.cpassword).toString();
       Setspinner(true);
       let data = await axios.post("http://localhost:4000/api/register", {
         name: formData.name,
         email: formData.email,
-        password: formData.password,
-        cpassword: formData.cpassword,
+        password: hashedPassword,
+        cpassword: chashedPassword,
       });
       console.log(data);
 
