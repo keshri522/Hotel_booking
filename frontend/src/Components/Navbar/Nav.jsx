@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Tooltip } from "antd";
 import { useNavigate } from "react-router-dom";
 import { loggedOutUser } from "../Redux/reducers/LoginUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -38,39 +39,48 @@ const Nav = () => {
         </Link>
       )}
       {UserData && UserData.User && UserData.User.email ? (
-        <Link style={{ fontSize: "1.5rem" }}>
-          <FontAwesomeIcon
-            icon={faLinkedin}
-            onClick={() => {
-              window.open(
-                "https://www.linkedin.com/in/rahul-keshri-814bb8221",
-                "_blank"
-              );
-            }}
-          />
-        </Link>
+        <Tooltip title="Linkdin">
+          <Link style={{ fontSize: "1.5rem" }}>
+            <FontAwesomeIcon
+              className="size"
+              icon={faLinkedin}
+              onClick={() => {
+                window.open(
+                  "https://www.linkedin.com/in/rahul-keshri-814bb8221",
+                  "_blank"
+                );
+              }}
+            />
+          </Link>
+        </Tooltip>
       ) : (
         <Link className="nav-link" to="/Register">
           Register
         </Link>
       )}
+      <Tooltip title="Portfolio">
+        <Link style={{ fontSize: "1.5rem" }}>
+          <FontAwesomeIcon
+            className="size"
+            icon={faDashcube}
+            onClick={() => {
+              window.open("https://keshri522.github.io/Myportfolio/", "_blank");
+            }}
+          />
+        </Link>
+      </Tooltip>
 
-      <Link style={{ fontSize: "1.5rem" }}>
-        <FontAwesomeIcon
-          icon={faDashcube}
-          onClick={() => {
-            window.open("https://keshri522.github.io/Myportfolio/", "_blank");
-          }}
-        />
-      </Link>
-      <Link style={{ fontSize: "1.5rem" }}>
-        <FontAwesomeIcon
-          icon={faGithub}
-          onClick={() => {
-            window.open("https://github.com/keshri522", "_blank");
-          }}
-        />
-      </Link>
+      <Tooltip title="Github">
+        <Link style={{ fontSize: "1.5rem" }}>
+          <FontAwesomeIcon
+            className="size"
+            icon={faGithub}
+            onClick={() => {
+              window.open("https://github.com/keshri522", "_blank");
+            }}
+          />
+        </Link>
+      </Tooltip>
     </nav>
   );
 };

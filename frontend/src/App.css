@@ -51,6 +51,14 @@
 .tt:hover {
   transform: scale(1.1);
 }
+/* for the transition effect */
+.size {
+  transition: all ease-in-out 0.4s;
+}
+.size:hover {
+  transform: scale(1.2);
+  color: black;
+}
 
 @media (max-width: 320px) {
   .d-flex.flex-column.flex-sm-row {
