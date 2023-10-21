@@ -40,3 +40,14 @@
     transform: rotate(360deg);
   }
 }
+.tt {
+  transition: all ease-in-out 0.3s;
+}
+.tt:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.tt:hover {
+  transform: scale(1.1);
+}

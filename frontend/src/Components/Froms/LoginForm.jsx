@@ -60,7 +60,7 @@ const LoginForm = ({ formData, handleChange, handleClikc, spinner }) => {
           )}
           <label
             type="button"
-            className=" mt-2"
+            className=" mt-2 tt"
             onClick={() => {
               navigate("/register");
             }}

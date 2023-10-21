@@ -58,16 +58,23 @@ const Register = () => {
         cpassword: formData.cpassword,
       });
       console.log(data);
+
       if (data.status === 200) {
         setTimeout(() => {
           // navigate("/login");
           Setspinner(false);
           toast.success("Register Sucessfully");
-        }, 3000);
+        }, 200);
       }
       // setting the response  then redircts to login page once i got the response
     } catch (error) {
-      Setspinner(false);
+      if (error && error.response && error.response.status === 400) {
+        setTimeout(() => {
+          toast.error("User already register");
+          Setspinner(false);
+        }, 1000);
+      }
+
       console.log(error);
     }
   };

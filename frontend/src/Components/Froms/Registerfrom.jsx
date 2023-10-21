@@ -96,7 +96,7 @@ const RegisterForm = ({
 
         <label
           type="button"
-          className=" mt-2 text-primary font-weight-bold"
+          className=" mt-2 text-primary font-weight-bold tt"
           onClick={hanldeRoute}
           required
         >
