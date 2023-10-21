@@ -55,12 +55,16 @@ const Register = () => {
       const hashedPassword = CryptoJS.SHA256(formData.password).toString();
       const chashedPassword = CryptoJS.SHA256(formData.cpassword).toString();
       Setspinner(true);
-      let data = await axios.post("http://localhost:4000/api/register", {
-        name: formData.name,
-        email: formData.email,
-        password: hashedPassword,
-        cpassword: chashedPassword,
-      });
+
+      let data = await axios.post(
+        `${process.env.REACT_APP_REACT_API_URL}/register`,
+        {
+          name: formData.name,
+          email: formData.email,
+          password: hashedPassword,
+          cpassword: chashedPassword,
+        }
+      );
       console.log(data);
 
       if (data.status === 200) {

@@ -44,11 +44,14 @@ const Login = () => {
 
       // the perform api request after validation
       Setspinner(true);
-      let data = await axios.post("http://localhost:4000/api/login", {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-      });
+      let data = await axios.post(
+        `${process.env.REACT_APP_REACT_API_URL}/login`,
+        {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
       console.log(data);
       if (data.status === 200) {
         setTimeout(() => {
