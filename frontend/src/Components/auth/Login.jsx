@@ -58,15 +58,16 @@ const Login = () => {
         }
       );
       console.log(res);
-      // sending the res to local strogage to persist the data while refreshing
-      localStorage.setItem("LoginUser", JSON.stringify(res.data));
 
-      dispatch(loggedInUser(res.data));
-      // add this res.data to reducx as well as local stroage then redirects
       if (res.status === 200) {
         setTimeout(() => {
           // navigate("/login");
           Setspinner(false);
+          // sending the res to local strogage to persist the data while refreshing
+          localStorage.setItem("LoginUser", JSON.stringify(res.data));
+
+          dispatch(loggedInUser(res.data));
+          // add this res.data to reducx as well as local stroage then redirects
           toast.success("Login Sucessfully");
         }, 1000);
       }
