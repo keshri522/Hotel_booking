@@ -51,6 +51,7 @@
 .tt:hover {
   transform: scale(1.1);
 }
+
 @media (max-width: 320px) {
   .d-flex.flex-column.flex-sm-row {
     flex-direction: column;
