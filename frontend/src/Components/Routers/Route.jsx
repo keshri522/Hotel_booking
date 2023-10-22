@@ -4,6 +4,7 @@ import Login from "../auth/Login";
 import Register from "../auth/Register";
 import Dashboard from "../User/dashboard";
 import Seller from "../User/seller";
+import NewHotels from "../Hotels/New";
 import { Route, Routes } from "react-router-dom";
 const Paths = () => {
   return (
@@ -14,6 +15,7 @@ const Paths = () => {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/seller" element={<Seller />}></Route>
+        <Route path="/hotels/new" element={<NewHotels />}></Route>
       </Routes>
     </div>
   );

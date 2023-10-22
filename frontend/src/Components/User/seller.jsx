@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DashboardNav from "../dashboardNav";
 import ConnectNav from "../ConnectNav";
+import { Link } from "react-router-dom";
 const Seller = () => {
   const navigate = useNavigate();
   // need to check this is protected routes only login user can access this routes
@@ -27,8 +28,23 @@ const Seller = () => {
       <div className="container-fluid p-4">
         <DashboardNav></DashboardNav>
       </div>
+      {/* showing all the hotels if present if not then user add or post new hotels */}
       <div className="container-fluid">
-        <p>your all hotels booking</p>
+        {/* need to show a button click on that show the hotels */}
+        <div className="row">
+          <div className="col-md-10">
+            <h1>Your Hotels</h1>
+          </div>
+          <div className="col-md-2">
+            <Link
+              style={{ fontWeight: "bold", color: "white" }}
+              to="/hotels/new"
+              className="btn btn-secondary"
+            >
+              + Add Hotels
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   );
