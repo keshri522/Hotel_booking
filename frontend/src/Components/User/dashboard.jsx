@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DashboardNav from "../dashboardNav";
 import ConnectNav from "../ConnectNav";
 const Dashboard = () => {
@@ -30,7 +30,15 @@ const Dashboard = () => {
         <DashboardNav></DashboardNav>
       </div>
       <div className="container-fluid">
-        <p>your all hotels booking</p>
+        {/* need to show a button click on that show the hotels */}
+        <div className="row">
+          <div className="col-md-10">
+            <h1>Your Booking</h1>
+          </div>
+          <div className="col-md-2">
+            <Link className="btn btn-primary">Show Hotels</Link>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -39,14 +39,21 @@ const Nav = () => {
         </Link>
       )}
       {UserData && UserData.User && UserData.User.email ? (
-        <Tooltip title="Linkdin">
+        <Link className="nav-link" to="/dashboard">
+          Dashboard
+        </Link>
+      ) : (
+        ""
+      )}
+      {UserData && UserData.User && UserData.User.email ? (
+        <Tooltip title="Portfolio">
           <Link style={{ fontSize: "1.5rem" }}>
             <FontAwesomeIcon
               className="size"
-              icon={faLinkedin}
+              icon={faDashcube}
               onClick={() => {
                 window.open(
-                  "https://www.linkedin.com/in/rahul-keshri-814bb8221",
+                  "https://keshri522.github.io/Myportfolio/",
                   "_blank"
                 );
               }}
@@ -58,7 +65,7 @@ const Nav = () => {
           Register
         </Link>
       )}
-      <Tooltip title="Portfolio">
+      {/* <Tooltip title="Portfolio">
         <Link style={{ fontSize: "1.5rem" }}>
           <FontAwesomeIcon
             className="size"
@@ -68,15 +75,17 @@ const Nav = () => {
             }}
           />
         </Link>
-      </Tooltip>
-
-      <Tooltip title="Github">
+      </Tooltip> */}
+      <Tooltip title="Linkdin">
         <Link style={{ fontSize: "1.5rem" }}>
           <FontAwesomeIcon
             className="size"
-            icon={faGithub}
+            icon={faLinkedin}
             onClick={() => {
-              window.open("https://github.com/keshri522", "_blank");
+              window.open(
+                "https://www.linkedin.com/in/rahul-keshri-814bb8221",
+                "_blank"
+              );
             }}
           />
         </Link>
