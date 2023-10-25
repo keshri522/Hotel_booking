@@ -87,7 +87,9 @@ const login = async (req, res) => {
 };
 // this is for the stipe method once our jwt is verifed then it will go for the next one
 const stripe = (req, res) => {
-  console.log("you have verified the jwt");
+  // console.log("you have verified the jwt");
+  // console.log(req.user);
+  // based on the req.user we can  find the user  in the daatabse
   res.status(200).send("verified");
 };
 

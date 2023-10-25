@@ -6,6 +6,8 @@ const authMiddleware = async (req, res, next) => {
 
     // need to verify the token
     let Verifiedtoken = await jwt.verify(token, process.env.JWTSECRET);
+    req.user = Verifiedtoken; // adding this veified id to the req.user that can be access anywhere to the backend in req
+
     if (!Verifiedtoken) {
       res.status(404).send("UnauthorizedUser");
     } else {

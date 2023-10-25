@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DashboardNav from "../dashboardNav";
 import ConnectNav from "../ConnectNav";
 import { Link } from "react-router-dom";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faL } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ConnectStripe from "../Functions/Api";
 import { toast } from "react-toastify";
@@ -32,7 +32,10 @@ const Seller = () => {
     try {
       Setshow(true);
       let res = await ConnectStripe(User.token);
-      console.log(res);
+      setTimeout(() => {
+        console.log(res);
+        Setshow(false);
+      }, 1000);
     } catch (error) {
       setTimeout(() => {
         toast.error("Stripe payout failed plese try after sometime");
