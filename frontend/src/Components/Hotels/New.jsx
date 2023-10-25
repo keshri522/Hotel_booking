@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Avatar } from "antd";
+import { DatePicker } from "antd";
 import { useDispatch } from "react-redux";
-import { loggedInUser } from "../Redux/reducers/LoginUser";
+import moment from "moment";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 const NewHotels = () => {
@@ -42,7 +42,7 @@ const NewHotels = () => {
     e.preventDefault();
   };
   const handleImageChange = (e) => {
-    const file = e.target.files[0]; // Get the selected file
+    const file = e.target.files[0];
 
     if (file) {
       const previewURL = URL.createObjectURL(file);
@@ -80,7 +80,7 @@ const NewHotels = () => {
         value={title}
         onChange={handlechange}
         placeholder="Title"
-        className="form-control mt-2"
+        className="form-control mt-3"
         required
       />
       <textarea
@@ -90,7 +90,7 @@ const NewHotels = () => {
         value={content}
         onChange={handlechange}
         placeholder="Content"
-        className="form-control mt-2"
+        className="form-control mt-3"
         required
       />
       <input
@@ -100,7 +100,7 @@ const NewHotels = () => {
         value={price}
         onChange={handlechange}
         placeholder="Price"
-        className="form-control mt-2"
+        className="form-control mt-3"
         required
       />
       <input
@@ -110,11 +110,44 @@ const NewHotels = () => {
         value={bed}
         onChange={handlechange}
         placeholder="Number of beds"
-        className="form-control mt-2"
+        className="form-control mt-3"
+        required
+      />
+      <DatePicker
+        className="form-control mt-3"
+        placeholder="From-Date"
+        onChange={(dateString, date) => {
+          Setvalues({ ...values, from: date });
+        }}
+        // this will not allow user to select the date which is less than today date
+        disabledDate={(current) =>
+          current && current.valueOf() < moment().subtract(1, "days")
+        }
+      ></DatePicker>
+      <DatePicker
+        className="form-control  mt-3"
+        placeholder="To-Date"
+        onChange={(dateString, date) => {
+          Setvalues({ ...values, from: date });
+        }}
+        // this will not allow user to select the date which is less than today date
+        disabledDate={(current) =>
+          current && current.valueOf() < moment().subtract(1, "days")
+        }
+      ></DatePicker>
+
+      <input
+        type="text"
+        name="location"
+        id=""
+        value={location}
+        onChange={handlechange}
+        placeholder="Enter location of hotel"
+        className="form-control mt-3"
         required
       />
       <button
-        className="btn btn-outline-primary m-2"
+        className="btn btn-outline-primary m-3"
         disabled={
           title.length === 0 ||
           price.length === 0 ||
@@ -130,7 +163,7 @@ const NewHotels = () => {
   return (
     <>
       <div className="container_fluid p-4 m-1 bg-secondary text-center">
-        <h2>Add hotel</h2>
+        <h2>Add Hotel</h2>
       </div>
       <div className="container_fluid ">
         <div className="row m-2">
