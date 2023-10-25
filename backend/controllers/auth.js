@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const User = require("../Modal/User");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config();
+
 const register = async (req, res) => {
   const { name, email, password, cpassword } = req.body;
   try {
@@ -86,15 +87,8 @@ const login = async (req, res) => {
   }
 };
 // this is for the stipe method once our jwt is verifed then it will go for the next one
-const stripe = (req, res) => {
-  // console.log("you have verified the jwt");
-  // console.log(req.user);
-  // based on the req.user we can  find the user  in the daatabse
-  res.status(200).send("verified");
-};
 
 module.exports = {
   register,
   login,
-  stripe,
 };

@@ -22,7 +22,7 @@ const Nav = () => {
       </Link>
       {UserData && UserData.User && UserData.User.email ? (
         <Link
-          to="/"
+          to="/login"
           className="nav-link"
           onClick={() => {
             // need to remove the local storage and redux as well then redirects to home page
