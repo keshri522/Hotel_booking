@@ -32,7 +32,7 @@ const NewHotels = () => {
     } else {
       navigate("/login");
     }
-  });
+  }, [User, navigate]);
   // if no User or User.email is present the no need to return the JSX simply return null
   if (!(User && User.token)) {
     return null;
@@ -103,16 +103,25 @@ const NewHotels = () => {
         className="form-control mt-3"
         required
       />
-      <input
-        type="number"
+      <select
         name="bed"
         id=""
-        value={bed}
-        onChange={handlechange}
-        placeholder="Number of beds"
+        placeholder="Select beds"
         className="form-control mt-3"
-        required
-      />
+        onChange={(e) => {
+          Setvalues({ ...values, bed: e.target.value });
+        }}
+      >
+        <option value="" hidden>
+          Select beds
+        </option>
+        <option value="1">{1}</option>
+        <option value="2">{2}</option>
+        <option value="3">{3}</option>
+        <option value="4">{4}</option>
+        <option value="5">{5}</option>
+      </select>
+
       <DatePicker
         className="form-control mt-3"
         placeholder="From-Date"
@@ -128,7 +137,7 @@ const NewHotels = () => {
         className="form-control  mt-3"
         placeholder="To-Date"
         onChange={(dateString, date) => {
-          Setvalues({ ...values, from: date });
+          Setvalues({ ...values, to: date });
         }}
         // this will not allow user to select the date which is less than today date
         disabledDate={(current) =>
