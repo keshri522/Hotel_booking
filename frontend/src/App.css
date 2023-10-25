@@ -63,7 +63,7 @@
 .img {
   height: 6rem;
   width: 6rem;
-  border-radius: 3rem 1rem;
+  border-radius: 3rem;
   box-shadow: 0px 0px 2px 3px silver;
   transition: all ease-in-out 0.4s;
 }

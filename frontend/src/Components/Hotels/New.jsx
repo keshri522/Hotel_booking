@@ -12,15 +12,14 @@ const NewHotels = () => {
     location: "",
     price: "",
     bed: "",
-    image: "",
+    images: "",
     to: "",
     from: "",
   });
-  const [preview, Setpreview] = useState(
-    "https://images.unsplash.com/photo-1575936123452-b67c3203c357?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D"
-  );
+  const [preview, Setpreview] = useState("");
+
   // destructing all the values
-  const { title, content, location, price, image, to, from, bed } = values;
+  const { title, content, location, price, images, to, from, bed } = values;
   const User = useSelector((state) => state.rootReducers.userLogin); // this will give the current logged in user
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,7 +41,16 @@ const NewHotels = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  const handleImageChange = () => {};
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]; // Get the selected file
+
+    if (file) {
+      const previewURL = URL.createObjectURL(file);
+      Setpreview(previewURL);
+      Setvalues({ ...values, images: file });
+    }
+  };
+
   // creating a function
   const handlechange = (e) => {
     const { name, value } = e.target;
@@ -58,7 +66,7 @@ const NewHotels = () => {
         <input
           type="file"
           hidden
-          name="image"
+          name="images"
           id="image"
           accept="image/*"
           onChange={handleImageChange}
@@ -127,10 +135,23 @@ const NewHotels = () => {
       <div className="container_fluid ">
         <div className="row m-2">
           <div className="col-md-10">{HotelForm()}</div>
-          {/* for the preview of the images */}
-          <div className="col-md-2">
-            <img src={preview} alt="Image_preview" className="img  m-2" />
-          </div>
+          {/* for the preview of the images shows condtionally */}
+          {preview ? (
+            <div className="col-md-2">
+              <img src={preview} alt="Image_preview" className="img  m-2" />
+              <span
+                onClick={() => {
+                  Setpreview("");
+                }}
+                className="text-danger"
+                type="button"
+              >
+                X
+              </span>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </>
