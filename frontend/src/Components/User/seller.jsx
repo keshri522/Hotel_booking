@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DashboardNav from "../dashboardNav";
@@ -6,7 +6,12 @@ import ConnectNav from "../ConnectNav";
 import { Link } from "react-router-dom";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ConnectStripe from "../Functions/Api";
+import { toast } from "react-toastify";
+// this will show spinner based on the response
+import Spinner from "../Spinner/spinner";
 const Seller = () => {
+  const [show, Setshow] = useState(false);
   const navigate = useNavigate();
   // need to check this is protected routes only login user can access this routes
   const User = useSelector((state) => state.rootReducers.userLogin);
@@ -23,7 +28,18 @@ const Seller = () => {
     return null;
   }
   // this is the onclick event
-  const ProcessPayouts = () => {};
+  const ProcessPayouts = async () => {
+    try {
+      Setshow(true);
+      let res = await ConnectStripe(User.token);
+      console.log(res);
+    } catch (error) {
+      setTimeout(() => {
+        toast.error("Stripe payout failed plese try after sometime");
+        Setshow(false);
+      }, 1000);
+    }
+  };
   // based on the stipe connect showing the seller dashboard
   // if user is present or if stripe_connect is there then only show add hotels
   // otherwise show first to connect wihth stipe
@@ -62,9 +78,14 @@ const Seller = () => {
             <p className="lead text-primary">
               Thrid Party Parterns to transfer earning to bank accounts
             </p>
-            <button className="btn btn-primary" onClick={ProcessPayouts}>
-              Process Payout
-            </button>
+            {/* showing the button contionally based on the state of the components  */}
+            {show ? (
+              <Spinner></Spinner>
+            ) : (
+              <button className="btn btn-primary" onClick={ProcessPayouts}>
+                Process Payout
+              </button>
+            )}
             <br />
             <br />
             <p className="text-muted">
