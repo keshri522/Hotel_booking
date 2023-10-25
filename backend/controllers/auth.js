@@ -85,8 +85,14 @@ const login = async (req, res) => {
     res.status(400).send(error);
   }
 };
+// this is for the stipe method once our jwt is verifed then it will go for the next one
+const stripe = (req, res) => {
+  console.log("you have verified the jwt");
+  res.status(200).send("verified");
+};
 
 module.exports = {
   register,
   login,
+  stripe,
 };
