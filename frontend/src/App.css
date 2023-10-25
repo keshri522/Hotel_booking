@@ -59,7 +59,17 @@
   transform: scale(1.2);
   color: black;
 }
-
+/* for the image */
+.img {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 3rem 1rem;
+  box-shadow: 0px 0px 2px 3px silver;
+  transition: all ease-in-out 0.4s;
+}
+.img:hover {
+  transform: rotate(180deg);
+}
 @media (max-width: 320px) {
   .d-flex.flex-column.flex-sm-row {
     flex-direction: column;

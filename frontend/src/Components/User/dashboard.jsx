@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import DashboardNav from "../dashboardNav";
 import ConnectNav from "../ConnectNav";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse, faPlus } from "@fortawesome/free-solid-svg-icons";
 const Dashboard = () => {
   const navigate = useNavigate();
   // need to check this is protected routes only login user can access this routes
@@ -31,13 +34,18 @@ const Dashboard = () => {
       </div>
       <div className="container-fluid">
         {/* need to show a button click on that show the hotels */}
-        <div className="row">
-          <div className="col-md-10">
-            <h1>Your Booking</h1>
-          </div>
-          <div className="col-md-2">
+        <div className="row mt-4">
+          <div className="col-md-6 offset-md-3 text-center">
+            <FontAwesomeIcon
+              className="h2"
+              icon={faHouse}
+              fade
+            ></FontAwesomeIcon>
+            <p className="lead">You can add hotels or post new hotels</p>
+
             <Link to="/hotels/new" className="btn btn-primary">
-              + Add hotels
+              <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+              <span style={{ fontWeight: "bold" }}> Hotels </span>
             </Link>
           </div>
         </div>
