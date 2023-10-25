@@ -20,6 +20,48 @@ const Seller = () => {
   if (!(User && User.token)) {
     return null;
   }
+  // based on the stipe connect showing the seller dashboard
+  // if user is present or if stripe_connect is there then only show add hotels
+  // otherwise show first to connect wihth stipe
+  const ConnectedStripe = () => (
+    <div className="container-fluid">
+      {/* need to show a button click on that show the hotels */}
+      <div className="row">
+        <div className="col-md-10">
+          <h1>Your Hotels</h1>
+        </div>
+        <div className="col-md-2">
+          <Link
+            style={{ fontWeight: "bold", color: "white" }}
+            to="/hotels/new"
+            className="btn btn-secondary"
+          >
+            + Add Hotels
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+  // this is for the user who is not connected with stripe
+  const NotConnectedStripe = () => (
+    <div className="container-fluid">
+      {/* need to show a button click on that show the hotels */}
+      <div className="row">
+        <div className="col-md-10">
+          <h1>Not connected with stipe</h1>
+        </div>
+        <div className="col-md-2">
+          {/* <Link
+            style={{ fontWeight: "bold", color: "white" }}
+            to="/hotels/new"
+            className="btn btn-secondary"
+          >
+            + Add Hotels
+          </Link> */}
+        </div>
+      </div>
+    </div>
+  );
   return (
     <>
       <div className="container-fluid bg-secondary p-3 text-center ">
@@ -28,24 +70,14 @@ const Seller = () => {
       <div className="container-fluid p-4">
         <DashboardNav></DashboardNav>
       </div>
-      {/* showing all the hotels if present if not then user add or post new hotels */}
-      <div className="container-fluid">
-        {/* need to show a button click on that show the hotels */}
-        <div className="row">
-          <div className="col-md-10">
-            <h1>Your Hotels</h1>
-          </div>
-          <div className="col-md-2">
-            <Link
-              style={{ fontWeight: "bold", color: "white" }}
-              to="/hotels/new"
-              className="btn btn-secondary"
-            >
-              + Add Hotels
-            </Link>
-          </div>
-        </div>
-      </div>
+      {/* showing based on the stripe connect rendering the dashboard */}
+
+      {User &&
+      User.User &&
+      User.User.stripe_seller &&
+      User.User.stripe.charges_enabled
+        ? ConnectedStripe()
+        : NotConnectedStripe()}
     </>
   );
 };
