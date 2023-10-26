@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const User = require("../Modal/User");
 const HotelSchema = new mongoose.Schema(
   {
     title: {
@@ -23,12 +23,12 @@ const HotelSchema = new mongoose.Schema(
       required: true,
     },
     fromDate: {
-      type: String,
+      type: Date,
       trim: true,
       required: true,
     },
     toDate: {
-      type: String,
+      type: Date,
       trim: true,
       required: true,
     },
@@ -41,6 +41,10 @@ const HotelSchema = new mongoose.Schema(
     images: {
       type: String,
       required: true,
+    },
+    postedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   { timestamps: true }

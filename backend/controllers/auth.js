@@ -106,9 +106,8 @@ const createHotels = async (req, res) => {
     });
     //save the data in data base
     await Newhotels.save();
-    res.status(200).send("ok");
+    res.status(200).send("true");
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 };

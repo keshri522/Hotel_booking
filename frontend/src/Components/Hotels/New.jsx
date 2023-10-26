@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CreateHotels from "../Functions/Api";
 import { toast } from "react-toastify";
-
+import axios from "axios";
 const NewHotels = () => {
   const [show, Setshow] = useState(false);
   // creating state to show
@@ -66,13 +66,28 @@ const NewHotels = () => {
       }, 1000);
     }
   };
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  const handleImageChange = async (e) => {
+    try {
+      const file = e.target.files[0];
+      const previewurl = URL.createObjectURL(file); // create the url of this
+      Setpreview(previewurl);
+      // uploading to cloudinary
+      const formdata = new FormData();
+      formdata.append("file", file);
+      formdata.append("upload_preset", process.env.REACT_APP_PRESET_NAME);
+      formdata.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
+      // making request to cloudinary
+      const res = await axios.post(
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
 
-    if (file) {
-      const previewURL = URL.createObjectURL(file);
-      Setpreview(previewURL);
-      Setvalues({ ...values, images: previewURL });
+        formdata //once i clikc on the signup the photo is uploaded to cloudinary server and give a link that link is added in our datab user collection
+      );
+      // console.log(res.data.url); // this is the url of cloudinary
+
+      Setvalues({ ...values, images: res.data.url }); // this is cloudinary url
+    } catch (error) {
+      console.log(error.message);
+      toast.error(`${error.message}`);
     }
   };
 
