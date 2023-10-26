@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const User = require("../Modal/User");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config();
+const Hotel = require("../Modal/NewHotels");
 
 const register = async (req, res) => {
   const { name, email, password, cpassword } = req.body;
@@ -86,9 +87,34 @@ const login = async (req, res) => {
     res.status(400).send(error);
   }
 };
-// this is for the stipe method once our jwt is verifed then it will go for the next one
+// now this is the controllers that will add functionality to form data or hotels coming from frontend
+const createHotels = async (req, res) => {
+  try {
+    // destructing the data coming from body
+    const { title, content, price, bed, images, location, from, to } =
+      req.body.data;
+    // now saving to databbase
+    const Newhotels = new Hotel({
+      title: title,
+      content: content,
+      price: price,
+      bed: bed,
+      images: images,
+      location: location,
+      fromDate: from,
+      toDate: to,
+    });
+    //save the data in data base
+    await Newhotels.save();
+    res.status(200).send("ok");
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+};
 
 module.exports = {
   register,
   login,
+  createHotels,
 };

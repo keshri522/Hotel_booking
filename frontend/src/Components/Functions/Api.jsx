@@ -1,10 +1,10 @@
 import axios from "axios";
 // this function wil send stripe request to backend
 
-const CreateHotels = async (token) => {
+const CreateHotels = async (token, data) => {
   const response = await axios.post(
-    `${process.env.REACT_APP_REACT_API_URL}/create_connect_account`,
-    {},
+    `${process.env.REACT_APP_REACT_API_URL}/create_hotels`,
+    { data: data },
     {
       headers: {
         Authorization: `Bearer ${token}`,

@@ -4,7 +4,11 @@ import { useDispatch } from "react-redux";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import CreateHotels from "../Functions/Api";
+import { toast } from "react-toastify";
+
 const NewHotels = () => {
+  const [show, Setshow] = useState(false);
   // creating state to show
   const [values, Setvalues] = useState({
     title: "",
@@ -38,8 +42,29 @@ const NewHotels = () => {
     return null;
   }
   // creating submit function
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // sending all the data to the backend
+    try {
+      Setshow(true);
+      let res = await CreateHotels(User.token, values);
+
+      setTimeout(() => {
+        if (res.status === 200) {
+          toast.success("Hotel posted Sucessfully");
+          // redireect to hotels page
+          navigate("/seller");
+        }
+        Setshow(false);
+      }, 1000);
+    } catch (error) {
+      setTimeout(() => {
+        if (error && error.response && error.response.status === 400) {
+          toast.error(`${error.message}`);
+        }
+        Setshow(false);
+      }, 1000);
+    }
   };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -47,7 +72,7 @@ const NewHotels = () => {
     if (file) {
       const previewURL = URL.createObjectURL(file);
       Setpreview(previewURL);
-      Setvalues({ ...values, images: file });
+      Setvalues({ ...values, images: previewURL });
     }
   };
 
@@ -155,17 +180,21 @@ const NewHotels = () => {
         className="form-control mt-3"
         required
       />
-      <button
-        className="btn btn-outline-primary m-3"
-        disabled={
-          title.length === 0 ||
-          price.length === 0 ||
-          content.length === 0 ||
-          bed.length === 0
-        }
-      >
-        Save
-      </button>
+      {show ? (
+        <button className="btn btn-outline-primary m-3">Saving...</button>
+      ) : (
+        <button
+          className="btn btn-outline-primary m-3"
+          disabled={
+            title.length === 0 ||
+            price.length === 0 ||
+            content.length === 0 ||
+            bed.length === 0
+          }
+        >
+          Save
+        </button>
+      )}
     </form>
   );
 
