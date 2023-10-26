@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import CreateHotels from "../Functions/Api";
 import { toast } from "react-toastify";
 import axios from "axios";
+// importing the Hotels form
+import HotelForm from "../Froms/Hotelform";
 const NewHotels = () => {
   const [show, Setshow] = useState(false);
   // creating state to show
@@ -100,118 +102,118 @@ const NewHotels = () => {
     }));
   };
 
-  const HotelForm = () => (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="image" className="btn btn-outline-primary  btn-block">
-        <input
-          type="file"
-          hidden
-          name="images"
-          id="image"
-          accept="image/*"
-          onChange={handleImageChange}
-        />
-        image
-      </label>
-      <input
-        type="text"
-        name="title"
-        id=""
-        value={title}
-        onChange={handlechange}
-        placeholder="Title"
-        className="form-control mt-3"
-        required
-      />
-      <textarea
-        type="text"
-        name="content"
-        id=""
-        value={content}
-        onChange={handlechange}
-        placeholder="Content"
-        className="form-control mt-3"
-        required
-      />
-      <input
-        type="number"
-        name="price"
-        id=""
-        value={price}
-        onChange={handlechange}
-        placeholder="Price"
-        className="form-control mt-3"
-        required
-      />
-      <select
-        name="bed"
-        id=""
-        placeholder="Select beds"
-        className="form-control mt-3"
-        onChange={(e) => {
-          Setvalues({ ...values, bed: e.target.value });
-        }}
-      >
-        <option value="" hidden>
-          Select beds
-        </option>
-        <option value="1">{1}</option>
-        <option value="2">{2}</option>
-        <option value="3">{3}</option>
-        <option value="4">{4}</option>
-        <option value="5">{5}</option>
-      </select>
+  // const HotelForm = () => (
+  //   <form onSubmit={handleSubmit}>
+  //     <label htmlFor="image" className="btn btn-outline-primary  btn-block">
+  //       <input
+  //         type="file"
+  //         hidden
+  //         name="images"
+  //         id="image"
+  //         accept="image/*"
+  //         onChange={handleImageChange}
+  //       />
+  //       image
+  //     </label>
+  //     <input
+  //       type="text"
+  //       name="title"
+  //       id=""
+  //       value={title}
+  //       onChange={handlechange}
+  //       placeholder="Title"
+  //       className="form-control mt-3"
+  //       required
+  //     />
+  //     <textarea
+  //       type="text"
+  //       name="content"
+  //       id=""
+  //       value={content}
+  //       onChange={handlechange}
+  //       placeholder="Content"
+  //       className="form-control mt-3"
+  //       required
+  //     />
+  //     <input
+  //       type="number"
+  //       name="price"
+  //       id=""
+  //       value={price}
+  //       onChange={handlechange}
+  //       placeholder="Price"
+  //       className="form-control mt-3"
+  //       required
+  //     />
+  //     <select
+  //       name="bed"
+  //       id=""
+  //       placeholder="Select beds"
+  //       className="form-control mt-3"
+  //       onChange={(e) => {
+  //         Setvalues({ ...values, bed: e.target.value });
+  //       }}
+  //     >
+  //       <option value="" hidden>
+  //         Select beds
+  //       </option>
+  //       <option value="1">{1}</option>
+  //       <option value="2">{2}</option>
+  //       <option value="3">{3}</option>
+  //       <option value="4">{4}</option>
+  //       <option value="5">{5}</option>
+  //     </select>
 
-      <DatePicker
-        className="form-control mt-3"
-        placeholder="From-Date"
-        onChange={(dateString, date) => {
-          Setvalues({ ...values, from: date });
-        }}
-        // this will not allow user to select the date which is less than today date
-        disabledDate={(current) =>
-          current && current.valueOf() < moment().subtract(1, "days")
-        }
-      ></DatePicker>
-      <DatePicker
-        className="form-control  mt-3"
-        placeholder="To-Date"
-        onChange={(dateString, date) => {
-          Setvalues({ ...values, to: date });
-        }}
-        // this will not allow user to select the date which is less than today date
-        disabledDate={(current) =>
-          current && current.valueOf() < moment().subtract(1, "days")
-        }
-      ></DatePicker>
+  //     <DatePicker
+  //       className="form-control mt-3"
+  //       placeholder="From-Date"
+  //       onChange={(dateString, date) => {
+  //         Setvalues({ ...values, from: date });
+  //       }}
+  //       // this will not allow user to select the date which is less than today date
+  //       disabledDate={(current) =>
+  //         current && current.valueOf() < moment().subtract(1, "days")
+  //       }
+  //     ></DatePicker>
+  //     <DatePicker
+  //       className="form-control  mt-3"
+  //       placeholder="To-Date"
+  //       onChange={(dateString, date) => {
+  //         Setvalues({ ...values, to: date });
+  //       }}
+  //       // this will not allow user to select the date which is less than today date
+  //       disabledDate={(current) =>
+  //         current && current.valueOf() < moment().subtract(1, "days")
+  //       }
+  //     ></DatePicker>
 
-      <input
-        type="text"
-        name="location"
-        id=""
-        value={location}
-        onChange={handlechange}
-        placeholder="Enter location of hotel"
-        className="form-control mt-3"
-        required
-      />
-      {show ? (
-        <button className="btn btn-outline-primary m-3">Saving...</button>
-      ) : (
-        <button
-          className="btn btn-outline-primary m-3"
-          disabled={
-            title.length === 0 ||
-            price.length === 0 ||
-            content.length === 0 ||
-            bed.length === 0
-          }
-        >
-          Save
-        </button>
-      )}
-    </form>
-  );
+  //     <input
+  //       type="text"
+  //       name="location"
+  //       id=""
+  //       value={location}
+  //       onChange={handlechange}
+  //       placeholder="Enter location of hotel"
+  //       className="form-control mt-3"
+  //       required
+  //     />
+  //     {show ? (
+  //       <button className="btn btn-outline-primary m-3">Saving...</button>
+  //     ) : (
+  //       <button
+  //         className="btn btn-outline-primary m-3"
+  //         disabled={
+  //           title.length === 0 ||
+  //           price.length === 0 ||
+  //           content.length === 0 ||
+  //           bed.length === 0
+  //         }
+  //       >
+  //         Save
+  //       </button>
+  //     )}
+  //   </form>
+  // );
 
   return (
     <>
@@ -220,7 +222,18 @@ const NewHotels = () => {
       </div>
       <div className="container_fluid ">
         <div className="row m-2">
-          <div className="col-md-10">{HotelForm()}</div>
+          <div className="col-md-10">
+            {/* this is hotel form data */}
+            <HotelForm
+              handleImageChange={handleImageChange}
+              handleSubmit={handleSubmit}
+              handlechange={handlechange}
+              Setvalues={Setvalues}
+              values={values}
+              show={show}
+              Setshow={Setshow}
+            ></HotelForm>
+          </div>
           {/* for the preview of the images shows condtionally */}
           {preview ? (
             <div className="col-md-2">
