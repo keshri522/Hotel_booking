@@ -1,5 +1,5 @@
 import axios from "axios";
-// this function wil send stripe request to backend
+// this function wil\create hotel in database
 
 const CreateHotels = async (token, data) => {
   const response = await axios.post(
