@@ -40,7 +40,6 @@ const HotelSchema = new mongoose.Schema(
 
     images: {
       type: String,
-      required: true,
     },
     postedBy: {
       type: mongoose.Schema.Types.ObjectId,

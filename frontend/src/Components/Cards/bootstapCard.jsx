@@ -9,11 +9,19 @@ const BootstapCard = ({ hotel }) => {
       <div className=" m-3 card">
         <div className="row no-gutters">
           <div className="col-md-4 ">
-            <img
-              className="card-image img img-fluid"
-              src={hotel.images}
-              alt="hotel_image"
-            />
+            {hotel.images ? (
+              <img
+                className="card-image imageStyle img img-fluid"
+                src={hotel.images}
+                alt="hotel_image"
+              />
+            ) : (
+              <img
+                className="card-image imageStyle img img-fluid"
+                src="https://cdn.britannica.com/96/115096-050-5AFDAF5D/Bellagio-Hotel-Casino-Las-Vegas.jpg"
+                alt="default_image"
+              />
+            )}
           </div>
           <div className="col-md-8">
             <div className="card-body">

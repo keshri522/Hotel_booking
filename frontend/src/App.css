@@ -90,6 +90,12 @@
     width: 100%;
   }
 }
+.imageStyle {
+  transition: all ease-in-out 0.4s;
+}
+.imageStyle:hover {
+  transform: scale(1.06);
+}
 
 @media (max-width: 320px) {
   .d-flex.flex-column.justify-content-between {
