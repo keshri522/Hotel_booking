@@ -111,9 +111,25 @@ const createHotels = async (req, res) => {
     res.status(400).send(error);
   }
 };
+// this function will give all the holtels int the dataBase
+const getHotels = async (req, res) => {
+  try {
+    const hotels = await Hotel.find({}).populate("postedBy", "_id", "name"); // this will give all the hotels and populate the curent user based on USER collection
+    if (hotels) {
+      res.status(200).send(hotels);
+      // console.log(hotels);
+    } else {
+      res.status(400).send("Hotels not found");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+};
 
 module.exports = {
   register,
   login,
   createHotels,
+  getHotels,
 };

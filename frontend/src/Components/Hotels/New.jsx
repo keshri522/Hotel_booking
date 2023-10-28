@@ -27,6 +27,7 @@ const NewHotels = () => {
   // destructing all the values
   const { title, content, location, price, images, to, from, bed } = values;
   const User = useSelector((state) => state.rootReducers.userLogin); // this will give the current logged in user
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // this is protected routes only logged user can access this routes
