@@ -2,6 +2,8 @@ import React from "react";
 import { Card, Avatar } from "antd";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import Typewrittereffect from "./TypeWritter/TypeEffect";
+import dp from "./dp.jpg";
 
 const ConnectNav = () => {
   // getting the data from redux
@@ -11,8 +13,8 @@ const ConnectNav = () => {
   return (
     <>
       <div className="container">
-        <div className="row">
-          <div className="col-md-4">
+        <div className="row d-flex justify-content-between">
+          <div className="col-md-4 ">
             <Card style={{ backgroundColor: "silver" }}>
               <Meta
                 avatar={
@@ -28,15 +30,18 @@ const ConnectNav = () => {
             </Card>
           </div>
           {/* rendering the payments based on the user connected to the stripe methods only */}
-          {User &&
-            User.name &&
-            User.stripe_seller &&
-            User.stripe_seller.charges_enabled && (
-              <>
-                <div className="col-md-3">Payment Balance</div>
-                <div className="col-md-3">Balance Setting</div>
-              </>
-            )}
+          <div className="col-md-4 ">
+            <Card style={{ backgroundColor: "silver" }}>
+              <Meta
+                avatar={<Avatar size={"large"} src={dp}></Avatar>}
+                title="Create By Rahul Keshri"
+                // this moment library uses and convert the date and time with proper format
+              />
+              <Typewrittereffect
+                text={["Mern Stack Developer", "Love My Work"]}
+              ></Typewrittereffect>
+            </Card>
+          </div>
         </div>
       </div>
     </>

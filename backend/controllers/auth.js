@@ -113,7 +113,7 @@ const createHotels = async (req, res) => {
 };
 // this function will give all the holtels int the dataBase
 const getHotels = async (req, res) => {
-  const perpage = 2; // per page how many hotesl
+  const perpage = 3; // per page how many hotesl
   const CurrentPage = req.query.page || 1;
   const find = (CurrentPage - 1) * perpage;
   try {

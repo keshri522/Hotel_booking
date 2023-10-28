@@ -62,7 +62,7 @@ const Home = () => {
       <div className="container-fluid text-center">
         <Pagination
           current={page}
-          total={Math.ceil(totalProuct / 2) * 10}
+          total={Math.ceil(totalProuct / 3) * 10}
           onChange={handlePageChange}
           className="text-center text-danger p-2 mb-1"
         ></Pagination>
