@@ -6,6 +6,8 @@ import Dashboard from "../User/dashboard";
 import Seller from "../User/seller";
 import NewHotels from "../Hotels/New";
 import { Route, Routes } from "react-router-dom";
+
+import ShowmoreDetails from "./../HotelDetails/showmore";
 const Paths = () => {
   return (
     <div>
@@ -16,6 +18,7 @@ const Paths = () => {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/seller" element={<Seller />}></Route>
         <Route path="/hotels/new" element={<NewHotels />}></Route>
+        <Route path="/details/:slug" element={<ShowmoreDetails />}></Route>
       </Routes>
     </div>
   );

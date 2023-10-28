@@ -18,6 +18,11 @@ const Home = () => {
   const handlePageChange = (page) => {
     Setpage(page);
   };
+  // this function will the hotels
+  const handleDelete = (id) => {
+    // deleting the hotel which is equal to id of the
+    // making api call to backend to delete the particular hotels
+  };
 
   useEffect(() => {
     Gethotels(page)
@@ -54,7 +59,11 @@ const Home = () => {
           </div>
         ) : (
           hotels.map((hotel) => (
-            <BootstapCard key={hotel._id} hotel={hotel}></BootstapCard>
+            <BootstapCard
+              handleDelete={handleDelete}
+              key={hotel._id}
+              hotel={hotel}
+            ></BootstapCard>
           ))
         )}
       </div>
