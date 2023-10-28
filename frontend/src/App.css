@@ -30,7 +30,13 @@
   height: 40px;
   animation: spin 1s linear infinite;
 }
-
+/* // for the loading */
+.load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 /* Animation Keyframes */
 @keyframes spin {
   0% {
