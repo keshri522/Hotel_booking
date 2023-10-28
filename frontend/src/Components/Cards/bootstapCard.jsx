@@ -1,5 +1,5 @@
 import React from "react";
-
+import DateFunctions from "../Functions/Date";
 const BootstapCard = ({ hotel }) => {
   //   console.log(hotel);
   // using bootstrap card class to shows
@@ -34,6 +34,16 @@ const BootstapCard = ({ hotel }) => {
                 0,
                 200
               )}...`}</p>
+              <p className="card-text texts">
+                for <span></span>
+                <span className="text-primary ">
+                  {/* this function will show the diffrence between from and to date in days */}
+                  {DateFunctions(hotel.fromDate, hotel.toDate)}
+                  {DateFunctions(hotel.fromDate, hotel.toDate) <= 1
+                    ? " day "
+                    : " days "}
+                </span>
+              </p>
             </div>
           </div>
         </div>
