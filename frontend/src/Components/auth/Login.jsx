@@ -69,7 +69,7 @@ const Login = () => {
           dispatch(loggedInUser(res.data));
           // add this res.data to reducx as well as local stroage then redirects
           toast.success("Login Sucessfully");
-          navigate("/seller");
+          navigate("/");
         }, 1000);
       }
       // setting the response  then redircts to login page once i got the response

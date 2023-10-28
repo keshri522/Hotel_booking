@@ -15,7 +15,7 @@ const DashboardNav = () => {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link" to="/seller" activeClassName="active">
+          <NavLink className="nav-link" to="/" activeClassName="active">
             Hotels
           </NavLink>
         </li>
