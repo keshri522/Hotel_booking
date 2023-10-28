@@ -120,7 +120,7 @@ const getHotels = async (req, res) => {
     const hotels = await Hotel.find({})
       .populate("postedBy", "_id", "name")
       .skip(find)
-      .sort({ createdAt: 1 })
+      .sort({ createdAt: -1 })
       .limit(perpage); // this will give all the hotels and populate the curent user based on USER collection
     if (hotels) {
       res.status(200).send(hotels);

@@ -53,7 +53,7 @@ const NewHotels = () => {
         if (res.status === 200) {
           toast.success("Hotel posted Sucessfully");
           // redireect to hotels page
-          navigate("/seller");
+          navigate("/");
         }
         Setshow(false);
       }, 1000);
