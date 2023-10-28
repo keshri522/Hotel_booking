@@ -4,24 +4,36 @@ import { loggedInUser } from "../Redux/reducers/LoginUser";
 import { useSelector } from "react-redux";
 import Gethotels from "../Functions/GetHotles";
 import BootstapCard from "../Cards/bootstapCard";
-import Spinner from "./../Spinner/spinner";
+import { toast } from "react-toastify";
 import TotalProducts from "../Functions/TotalProducts";
+import DeleteHotel from "../Functions/Deletehotel";
+import { UseSelector } from "react-redux/es/hooks/useSelector";
 // pagination from ant design
 import { Pagination } from "antd";
 const Home = () => {
   const [hotels, Sethotles] = useState([]);
   const [show, Setshow] = useState(true); // Set show to true initially
   const [page, Setpage] = useState(1);
+  const [check, Setcheck] = useState(false);
   const [totalProuct, SettotalProduct] = useState(0);
   // const dispatch = useDispatch();
   // this function will handle the page changes based on pagination
   const handlePageChange = (page) => {
     Setpage(page);
   };
+  const token = useSelector((state) => state.rootReducers.userLogin.token);
   // this function will the hotels
-  const handleDelete = (id) => {
-    // deleting the hotel which is equal to id of the
-    // making api call to backend to delete the particular hotels
+  const handleDelete = async (id) => {
+    try {
+      Setcheck(true);
+      let res = await DeleteHotel(token, id, page);
+      Sethotles(res.data);
+      Setcheck(true);
+      toast.success("Hotel deleted successfully");
+    } catch (error) {
+      Setcheck(false);
+      toast.error(error.message);
+    }
   };
 
   useEffect(() => {
@@ -31,8 +43,8 @@ const Home = () => {
         Setshow(false); // Set show to false after data is fetched
       })
       .catch((err) => {
-        console.log(err);
         Setshow(false); // Set show to false in case of error
+        toast.error(err.message);
       });
   }, [page]);
   // this is for the total products
@@ -41,11 +53,16 @@ const Home = () => {
       .then((res) => {
         // console.log(res.data);
         SettotalProduct(res.data.hotelsCount);
+        // this line will change the pagination based on the total coutn
+        const newTotalPages = Math.ceil(res.data.hotelsCount / 3);
+        if (page > newTotalPages) {
+          Setpage(newTotalPages); // Set page to the last page if the current page is beyond the new total pages
+        }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
-  }, [page]);
+  }, [page, check]);
 
   return (
     <>

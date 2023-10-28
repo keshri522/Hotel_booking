@@ -147,6 +147,32 @@ const totalHotels = async (req, res) => {
     res.status(400).send(error);
   }
 };
+// this function will delete the hotel based on the id
+const deleteHotel = async (req, res) => {
+  const { id, page } = req.body;
+
+  try {
+    let deletedHotel = await Hotel.findByIdAndDelete(id);
+    if (!deletedHotel) {
+      return res.status(400).send("Hotel not found for deletion");
+    }
+    const perpage = 3;
+    const find = (page - 1) * perpage;
+
+    const hotels = await Hotel.find({})
+      .populate("postedBy", "_id", "name")
+      .skip(find)
+      .sort({ createdAt: -1 })
+      .limit(perpage);
+    if (hotels) {
+      return res.status(200).send(hotels);
+    } else {
+      return res.status(400).send("Hotels not found");
+    }
+  } catch (error) {
+    return res.status(500).send("Internal Server Error");
+  }
+};
 
 module.exports = {
   register,
@@ -154,4 +180,5 @@ module.exports = {
   createHotels,
   getHotels,
   totalHotels,
+  deleteHotel,
 };

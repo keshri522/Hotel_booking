@@ -16,13 +16,13 @@ const BootstapCard = ({ hotel, handleDelete }) => {
           <div className="col-md-4 ">
             {hotel.images ? (
               <img
-                className="card-image imageStyle img img-fluid"
+                className="card-image imageStyle img img-fluid h-100"
                 src={hotel.images}
                 alt="hotel_image"
               />
             ) : (
               <img
-                className="card-image imageStyle img img-fluid"
+                className="card-image imageStyle img img-fluid h-100"
                 src="https://cdn.britannica.com/96/115096-050-5AFDAF5D/Bellagio-Hotel-Casino-Las-Vegas.jpg"
                 alt="default_image"
               />
@@ -52,6 +52,7 @@ const BootstapCard = ({ hotel, handleDelete }) => {
               <p className="cart-text">
                 Available from {new Date(hotel.fromDate).toLocaleDateString()}
               </p>
+
               <div className="row d-flex justify-content-between">
                 <div className="col-md-4 mb-2 mb-md-0">
                   <button
