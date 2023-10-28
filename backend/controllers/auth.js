@@ -113,11 +113,32 @@ const createHotels = async (req, res) => {
 };
 // this function will give all the holtels int the dataBase
 const getHotels = async (req, res) => {
+  const perpage = 2; // per page how many hotesl
+  const CurrentPage = req.query.page || 1;
+  const find = (CurrentPage - 1) * perpage;
   try {
-    const hotels = await Hotel.find({}).populate("postedBy", "_id", "name"); // this will give all the hotels and populate the curent user based on USER collection
+    const hotels = await Hotel.find({})
+      .populate("postedBy", "_id", "name")
+      .skip(find)
+      .sort({ createdAt: 1 })
+      .limit(perpage); // this will give all the hotels and populate the curent user based on USER collection
     if (hotels) {
       res.status(200).send(hotels);
       // console.log(hotels);
+    } else {
+      res.status(400).send("Hotels not found");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+};
+// this function will give toal number of hotesl present in database for paginations
+const totalHotels = async (req, res) => {
+  try {
+    const hotelsCount = await Hotel.find({}).count();
+    if (hotelsCount !== null) {
+      res.status(200).send({ hotelsCount });
     } else {
       res.status(400).send("Hotels not found");
     }
@@ -132,4 +153,5 @@ module.exports = {
   login,
   createHotels,
   getHotels,
+  totalHotels,
 };

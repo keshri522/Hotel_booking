@@ -9,6 +9,7 @@ const {
   login,
   createHotels,
   getHotels,
+  totalHotels,
 } = require("../controllers/auth");
 router.post("/register", register);
 router.post("/login", login);
@@ -18,4 +19,5 @@ const authMiddleware = require("../middleware/auth");
 // router.post("/create_connect_account", authMiddleware);
 router.post("/create_hotels", authMiddleware, createHotels);
 router.get("/getHotels", getHotels);
+router.get("/totalhotels", totalHotels);
 module.exports = router;

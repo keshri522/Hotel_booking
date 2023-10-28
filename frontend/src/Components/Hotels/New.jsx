@@ -235,7 +235,7 @@ const NewHotels = () => {
           {/* for the preview of the images shows condtionally */}
           {preview ? (
             <div className="col-md-2">
-              <img src={preview} alt="Image_preview" className="img  m-2" />
+              <img src={preview} alt="Image_preview" className="img1  m-2" />
               <span
                 onClick={() => {
                   Setpreview("");
