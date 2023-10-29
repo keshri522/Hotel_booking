@@ -12,6 +12,7 @@ const {
   totalHotels,
   deleteHotel,
   loginUserHotels,
+  deleteBookedHotel,
 } = require("../controllers/auth");
 router.post("/register", register);
 router.post("/login", login);
@@ -25,4 +26,5 @@ router.get("/totalhotels", totalHotels);
 router.post("/deletehotel", authMiddleware, deleteHotel);
 // this routes will handle the login user who has create the hotels return all the hotels based on the id
 router.get("/loginUserhotels", authMiddleware, loginUserHotels);
+router.post("/deleteBookedHotel", authMiddleware, deleteBookedHotel); // this will delete booked hotes by user
 module.exports = router;

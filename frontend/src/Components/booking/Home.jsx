@@ -21,20 +21,20 @@ const Home = () => {
   const handlePageChange = (page) => {
     Setpage(page);
   };
-  const token = useSelector((state) => state.rootReducers.userLogin.token);
-  // this function will the hotels
-  const handleDelete = async (id) => {
-    try {
-      Setcheck(true);
-      let res = await DeleteHotel(token, id, page);
-      Sethotles(res.data);
-      Setcheck(true);
-      toast.success("Hotel deleted successfully");
-    } catch (error) {
-      Setcheck(false);
-      toast.error(error.message);
-    }
-  };
+  // const token = useSelector((state) => state.rootReducers.userLogin.token);
+  // // this function will the hotels
+  // const handleDelete = async (id) => {
+  //   try {
+  //     Setcheck(true);
+  //     let res = await DeleteHotel(token, id, page);
+  //     Sethotles(res.data);
+  //     Setcheck(true);
+  //     toast.success("Hotel deleted successfully");
+  //   } catch (error) {
+  //     Setcheck(false);
+  //     toast.error(error.message);
+  //   }
+  // };
 
   useEffect(() => {
     Gethotels(page)
@@ -76,11 +76,7 @@ const Home = () => {
           </div>
         ) : (
           hotels.map((hotel) => (
-            <BootstapCard
-              handleDelete={handleDelete}
-              key={hotel._id}
-              hotel={hotel}
-            ></BootstapCard>
+            <BootstapCard key={hotel._id} hotel={hotel}></BootstapCard>
           ))
         )}
       </div>

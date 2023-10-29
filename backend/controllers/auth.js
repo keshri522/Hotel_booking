@@ -193,6 +193,26 @@ const loginUserHotels = async (req, res) => {
     res.status(500).send("Not found");
   }
 };
+// this api first delte the hotes then return all the booked hotels by user
+const deleteBookedHotel = async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    let deletedHotel = await Hotel.findByIdAndDelete(id);
+    let hotelslist = await Hotel.find({ postedBy: req.user._id }).populate(
+      "postedBy",
+      "name _id"
+    ); // this will give only the username and its id that can show to cleint side
+
+    if (hotelslist.length > 0) {
+      res.status(200).send(hotelslist);
+    } else {
+      res.status(400).send("Hotels not found");
+    }
+  } catch (error) {
+    res.status(500).send("Not found");
+  }
+};
 module.exports = {
   register,
   login,
@@ -201,4 +221,5 @@ module.exports = {
   totalHotels,
   deleteHotel,
   loginUserHotels,
+  deleteBookedHotel,
 };

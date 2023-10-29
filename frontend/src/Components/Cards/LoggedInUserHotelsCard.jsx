@@ -1,10 +1,10 @@
 import React from "react";
 import DateFunctions from "../Functions/Date";
 import { useNavigate } from "react-router-dom";
-
+import Spinner from "../Spinner/spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-const BootstapCard = ({ hotel, handleDelete }) => {
+const UserHotels = ({ hotel, handleDelete }) => {
   const navigate = useNavigate();
   //   console.log(hotel);
   // using bootstrap card class to shows
@@ -54,19 +54,31 @@ const BootstapCard = ({ hotel, handleDelete }) => {
               </p>
 
               <div className="row d-flex justify-content-center">
+                {/* this two buttons can be showed only if the user who posted the hotels they can delete the hotels and update the hotels */}
                 <div className="col-md-4 mb-2 mb-md-0">
+                  {/* showing two more button one for update second is for delete the hotels but these are visible only if that login user create the hotes hotels can be deeltd by those who created hotels */}
                   <button
                     onClick={() => {
-                      navigate(`details/${hotel.title.split(" ").join("")}`, {
+                      navigate(`edit/${hotel.title.split(" ").join("")}`, {
                         state: { data: hotel }, // sending the data of particular hotel
                       }); // removes spaces
                     }}
-                    className="btn btn-outline-success w-100"
+                    className="btn btn-outline-warning w-100"
                   >
-                    show more
+                    <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
                   </button>
                 </div>
-                {/* this two buttons can be showed only if the user who posted the hotels they can delete the hotels and update the hotels */}
+                <div className="col-md-4 mb-2 mb-md-0">
+                  {/* showing two more button one for update second is for delete the hotels but these are visible only if that login user create the hotes hotels can be deeltd by those who created hotels */}
+                  <button
+                    onClick={() => {
+                      handleDelete(hotel._id); // sending the id to the parent compoents
+                    }}
+                    className="btn btn-outline-danger w-100 "
+                  >
+                    <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -76,4 +88,4 @@ const BootstapCard = ({ hotel, handleDelete }) => {
   );
 };
 
-export default BootstapCard;
+export default UserHotels;
