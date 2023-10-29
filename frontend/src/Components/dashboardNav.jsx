@@ -11,12 +11,12 @@ const DashboardNav = () => {
             to="/dashboard"
             activeClassName="active"
           >
-            Your Booking
+            Add Hotels
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link" to="/" activeClassName="active">
-            Hotels
+          <NavLink className="nav-link" to="/seller" activeClassName="active">
+            Your Booking
           </NavLink>
         </li>
       </ul>

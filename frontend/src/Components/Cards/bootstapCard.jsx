@@ -66,6 +66,7 @@ const BootstapCard = ({ hotel, handleDelete }) => {
                     show more
                   </button>
                 </div>
+                {/* this two buttons can be showed only if the user who posted the hotels they can delete the hotels and update the hotels */}
                 <div className="col-md-4 mb-2 mb-md-0">
                   {/* showing two more button one for update second is for delete the hotels but these are visible only if that login user create the hotes hotels can be deeltd by those who created hotels */}
                   <button

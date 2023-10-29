@@ -103,6 +103,7 @@ const createHotels = async (req, res) => {
       location: location,
       fromDate: from,
       toDate: to,
+      postedBy: req.user._id, // this id will come once jwt is verifed then add the in req.user
     });
     //save the data in data base
     await Newhotels.save();
@@ -118,7 +119,7 @@ const getHotels = async (req, res) => {
   const find = (CurrentPage - 1) * perpage;
   try {
     const hotels = await Hotel.find({})
-      .populate("postedBy", "_id", "name")
+      .populate("postedBy")
       .skip(find)
       .sort({ createdAt: -1 })
       .limit(perpage); // this will give all the hotels and populate the curent user based on USER collection
@@ -174,6 +175,24 @@ const deleteHotel = async (req, res) => {
   }
 };
 
+// this function will return the hoteslist bases on the login user or who created the htoesl
+const loginUserHotels = async (req, res) => {
+  try {
+    let hotelslist = await Hotel.find({ postedBy: req.user._id }).populate(
+      "postedBy",
+      "name _id"
+    ); // this will give only the username and its id that can show to cleint side
+
+    if (hotelslist.length > 0) {
+      res.status(200).send(hotelslist);
+      // console.log(hotelslist);
+    } else {
+      res.status(400).send("Hotels not found");
+    }
+  } catch (error) {
+    res.status(500).send("Not found");
+  }
+};
 module.exports = {
   register,
   login,
@@ -181,4 +200,5 @@ module.exports = {
   getHotels,
   totalHotels,
   deleteHotel,
+  loginUserHotels,
 };
