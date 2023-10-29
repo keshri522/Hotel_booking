@@ -66,7 +66,7 @@ const Register = () => {
           cpassword: chashedPassword,
         }
       );
-      console.log(data);
+      // console.log(data);
 
       if (data.status === 200) {
         setTimeout(() => {
@@ -84,9 +84,10 @@ const Register = () => {
         }, 1000);
       }
 
-      console.log(error);
+      // console.log(error);
     }
   };
+  // this function will validate all the erros firlds
   const handleReset = () => {
     Setreset(true);
     // using settime out to show effects

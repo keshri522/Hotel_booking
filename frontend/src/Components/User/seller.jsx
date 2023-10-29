@@ -61,21 +61,43 @@ const Seller = () => {
         <DashboardNav></DashboardNav>
       </div>
       {/* this will show all the hotels has booked */}
-      <div className="container">
-        {loading ? (
-          <div className="load">
-            <h3 className="text-danger">...loading</h3>
+      {hotels.length > 0 ? (
+        <div className="container">
+          {loading ? (
+            <div className="load">
+              <h3 className="text-danger">...loading</h3>
+            </div>
+          ) : (
+            hotels.map((hotel) => (
+              <UserHotels
+                handleDelete={handleDelete}
+                key={hotel._id}
+                hotel={hotel}
+              ></UserHotels>
+            ))
+          )}
+        </div>
+      ) : (
+        <div className="container">
+          <div className="row">
+            <div className="col-md-9 offset-md-2 text-center">
+              <h2 className="text-primary">
+                Welcome {User.User.name} to
+                <span className="text-danger"> KeshriHotels</span>
+              </h2>
+              <p className="texts">haven't post any hotels</p>
+              <button
+                onClick={() => {
+                  navigate("/hotels/new");
+                }}
+                className="btn btn-primary"
+              >
+                Post new hotels
+              </button>
+            </div>
           </div>
-        ) : (
-          hotels.map((hotel) => (
-            <UserHotels
-              handleDelete={handleDelete}
-              key={hotel._id}
-              hotel={hotel}
-            ></UserHotels>
-          ))
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };

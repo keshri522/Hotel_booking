@@ -27,11 +27,7 @@ const Login = () => {
 
     e.preventDefault();
     try {
-      if (
-        formData.name.length === 0 ||
-        formData.email.length === 0 ||
-        formData.password.length === 0
-      ) {
+      if (formData.email.length === 0 || formData.password.length === 0) {
         toast.error("Please fill all the fields");
         return;
       }

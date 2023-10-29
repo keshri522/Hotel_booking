@@ -5,7 +5,7 @@ const LoginForm = ({ formData, handleChange, handleClikc, spinner }) => {
   return (
     <>
       <div>
-        <div className="form-floating mb-3 ">
+        {/* <div className="form-floating mb-3 ">
           <input
             type="text"
             name="name"
@@ -18,7 +18,7 @@ const LoginForm = ({ formData, handleChange, handleClikc, spinner }) => {
           <label htmlFor="floatingPassword">
             Name<span className="text-danger">*</span>
           </label>
-        </div>
+        </div> */}
         <div className="form-floating mb-3">
           <input
             type="email"
