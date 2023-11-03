@@ -11,7 +11,7 @@ const HotelForm = ({
   show,
   Setshow,
 }) => {
-  const { title, content, price, location } = values; // Destructuring values for easier access
+  const { title, content, price, location, bed, to, from } = values; // Destructuring values for easier access
 
   return (
     <form onSubmit={handleSubmit}>
@@ -55,6 +55,7 @@ const HotelForm = ({
       />
       <select
         name="bed"
+        value={bed}
         placeholder="Select beds"
         className="form-control mt-3"
         onChange={(e) => {

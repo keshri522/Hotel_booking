@@ -5,6 +5,7 @@ import DashboardNav from "../dashboardNav";
 import ConnectNav from "../ConnectNav";
 import { toast } from "react-toastify";
 import LoginUserHotels from "./../Functions/UserBookedhotels";
+
 // this will show spinner based on the response
 import UserHotels from "../Cards/LoggedInUserHotelsCard";
 import Hoteldelte from "../Functions/LgingUserHoteldelete";
@@ -43,8 +44,11 @@ const Seller = () => {
   if (!(User && User.token)) {
     return null;
   }
-  // the function will delete the Booked Hotesl by login user
+  // creating a MODEL TO DO confirm the delete the hotels asking to login user
+
   const handleDelete = async (id) => {
+    // the function will delete the Booked Hotesl by login user
+
     try {
       let res = await Hoteldelte(User.token, id);
       setHotels(res.data);

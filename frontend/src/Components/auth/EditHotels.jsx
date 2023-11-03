@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { DatePicker } from "antd";
-import { useDispatch } from "react-redux";
-import moment from "moment";
+import React from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import CreateHotels from "../Functions/Api";
+import { json, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-// importing the Hotels form
 import HotelForm from "../Froms/Hotelform";
-const NewHotels = () => {
-  const [show, Setshow] = useState(false);
-  // creating state to show
+import GetsingleHotel from "./../Functions/getsinglehotels";
+import CreateHotels from "../Functions/Api";
+const EditHotels = () => {
   const [values, Setvalues] = useState({
     title: "",
     content: "",
@@ -22,21 +18,51 @@ const NewHotels = () => {
     to: "",
     from: "",
   });
-  const [preview, Setpreview] = useState("");
-  // destructing all the values
   const { title, content, location, price, images, to, from, bed } = values;
+  let hotelIds; // hotels ids
   const User = useSelector((state) => state.rootReducers.userLogin); // this will give the current logged in user
-  const dispatch = useDispatch();
+  const getId = () => {
+    let ids = localStorage.getItem("id");
+    hotelIds = ids;
+  };
+
+  useEffect(() => {
+    // this functino will find the single hotels id
+    getId();
+  }, [User]);
   const navigate = useNavigate();
+
+  const [show, Setshow] = useState("");
+  const [preview, Setpreview] = useState("");
+  useEffect(() => {
+    GetsingleHotel(User.token, hotelIds)
+      .then((res) => {
+        // console.log(res);
+        res.data.toDate = new Date(res.data.toDate);
+        res.data.fromDate = new Date(res.data.fromDate);
+        Setvalues({ ...values, ...res.data });
+
+        Setpreview(res.data.images); // setting the image
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
+  }, [User, hotelIds]);
   // this is protected routes only logged user can access this routes
   // routes based login
+  //   console.log(values);
   useEffect(() => {
-    if (User && User.token) {
-      navigate("/hotels/new");
-    } else {
-      navigate("/login");
+    if (title) {
+      const paths = title.split(" ").join("");
+      //   console.log(paths);
+      if (User && User.token) {
+        navigate(`/seller/edit/${paths}`);
+      } else {
+        navigate("/login");
+      }
     }
-  }, [User, navigate]);
+  }, [User, navigate, title]);
+
   // if no User or User.email is present the no need to return the JSX simply return null
   if (!(User && User.token)) {
     return null;
@@ -51,7 +77,7 @@ const NewHotels = () => {
 
       setTimeout(() => {
         if (res.status === 200) {
-          toast.success("Hotel posted Sucessfully");
+          toast.success("Hotel Updated Sucessfully");
           // redireect to hotels page
           navigate("/");
         }
@@ -103,7 +129,7 @@ const NewHotels = () => {
   return (
     <>
       <div className="container_fluid p-4 m-1 bg-secondary text-center">
-        <h2>Add Hotel</h2>
+        <h2>Update Hotels</h2>
       </div>
       <div className="container_fluid ">
         <div className="row m-2">
@@ -142,4 +168,4 @@ const NewHotels = () => {
   );
 };
 
-export default NewHotels;
+export default EditHotels;

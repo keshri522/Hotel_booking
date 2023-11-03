@@ -6,7 +6,7 @@ import Dashboard from "../User/dashboard";
 import Seller from "../User/seller";
 import NewHotels from "../Hotels/New";
 import { Route, Routes } from "react-router-dom";
-
+import EditHotels from "../auth/EditHotels";
 import ShowmoreDetails from "./../HotelDetails/showmore";
 const Paths = () => {
   return (
@@ -19,6 +19,7 @@ const Paths = () => {
         <Route path="/seller" element={<Seller />}></Route>
         <Route path="/hotels/new" element={<NewHotels />}></Route>
         <Route path="/details/:slug" element={<ShowmoreDetails />}></Route>
+        <Route path="/seller/edit/:slug" element={<EditHotels />}></Route>
       </Routes>
     </div>
   );

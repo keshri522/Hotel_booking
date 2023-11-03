@@ -89,10 +89,32 @@ const login = async (req, res) => {
 };
 // now this is the controllers that will add functionality to form data or hotels coming from frontend
 const createHotels = async (req, res) => {
+  // note first check if the id coming in th body is already present then find make it update
+  const { id } = req.body.data;
+
   try {
     // destructing the data coming from body
     const { title, content, price, bed, images, location, from, to } =
       req.body.data;
+    if (id) {
+      const find = await Hotel.findByIdAndUpdate(id, {
+        title: title,
+        content: content,
+        price: price,
+        bed: bed,
+        images: images,
+        location: location,
+        fromDate: from,
+        toDate: to,
+        postedBy: req.user._id, // this id will come once jwt is verifed then add the in req.user
+      });
+      if (find) {
+        res.status(200).send("true");
+      } else {
+        res.status(400).send("false");
+      }
+    }
+
     // now saving to databbase
     const Newhotels = new Hotel({
       title: title,
@@ -213,6 +235,24 @@ const deleteBookedHotel = async (req, res) => {
     res.status(500).send("Not found");
   }
 };
+// this function will return a single hotels based on the id coming in req
+const singleHotel = async (req, res) => {
+  const id = req.body.id;
+
+  try {
+    let hotel = await Hotel.findById(id);
+
+    if (hotel) {
+      res.status(200).send(hotel);
+    } else {
+      res.status(400).send("Hotel not found");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error"); // <-- Changed response message to a more generic error message
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -222,4 +262,5 @@ module.exports = {
   deleteHotel,
   loginUserHotels,
   deleteBookedHotel,
+  singleHotel,
 };

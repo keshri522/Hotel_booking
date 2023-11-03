@@ -59,9 +59,8 @@ const UserHotels = ({ hotel, handleDelete }) => {
                   {/* showing two more button one for update second is for delete the hotels but these are visible only if that login user create the hotes hotels can be deeltd by those who created hotels */}
                   <button
                     onClick={() => {
-                      navigate(`edit/${hotel.title.split(" ").join("")}`, {
-                        state: { data: hotel }, // sending the data of particular hotel
-                      }); // removes spaces
+                      localStorage.setItem("id", hotel._id); // sending ids  to storage
+                      navigate(`edit/${hotel.title.split(" ").join("")}`, {}); // removes spaces
                     }}
                     className="btn btn-outline-warning w-100"
                   >
