@@ -273,10 +273,10 @@ const StripeBookHotel = async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: "http://localhost:3000/#/success",
-      cancel_url: "http://localhost:3000/#/error",
+      success_url: "http://localhost:3000/#/success", // if payment is successful then redirect back to
+      cancel_url: "http://localhost:3000/#/error", // if payment is unsuccessful then redirect back to
     });
-    res.status(200).send({ url: response.url });
+    res.status(200).send({ url: response.url }); // this url is urul of stri[e]
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");
