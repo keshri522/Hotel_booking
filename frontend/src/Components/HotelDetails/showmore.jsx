@@ -27,7 +27,7 @@ const ShowmoreDetails = () => {
   useEffect(() => {
     if (hotelId) {
       Setshow(true);
-      GetsingleHotel(User.token, hotelId).then((res) => {
+      GetsingleHotel(hotelId).then((res) => {
         if (res.status === 200) {
           Sethotles(res.data);
           // console.log(res.data);
@@ -38,7 +38,14 @@ const ShowmoreDetails = () => {
       });
     }
   }, [hotelId, navigate, User]);
-
+  // this functio will responsive for navigating user based on the routes // routes based login
+  const handleClicked = () => {
+    if (User && User.token) {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <>
       <div className="container_fluid p-4 m-1 bg-secondary text-center">
@@ -97,8 +104,12 @@ const ShowmoreDetails = () => {
                   {hotels.postedBy ? hotels.postedBy.name : "Unknown User"}
                 </h6>
 
-                <button className="btn btn-outline-success w-100">
-                  Book Hotel
+                <button
+                  onClick={handleClicked}
+                  className="btn btn-outline-success w-100"
+                >
+                  {/* added condtionlly showing of button based on token */}
+                  {User && User.token ? "Book Hotel" : "Login to Book Hotel"}
                 </button>
               </div>
             ) : (
