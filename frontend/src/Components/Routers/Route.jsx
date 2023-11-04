@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import EditHotels from "../auth/EditHotels";
 import ShowmoreDetails from "./../HotelDetails/showmore";
 import StripeSuccess from "../auth/StripeSuccess";
+import Stripeerror from "../auth/StripeError";
 const Paths = () => {
   return (
     <div>
@@ -22,6 +23,7 @@ const Paths = () => {
         <Route path="/details/:slug" element={<ShowmoreDetails />}></Route>
         <Route path="/seller/edit/:slug" element={<EditHotels />}></Route>
         <Route path="/success" element={<StripeSuccess />}></Route>
+        <Route path="/error" element={<Stripeerror />}></Route>
       </Routes>
     </div>
   );
