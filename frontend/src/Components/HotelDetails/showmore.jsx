@@ -39,7 +39,8 @@ const ShowmoreDetails = () => {
     }
   }, [hotelId, navigate, User]);
   // this functio will responsive for navigating user based on the routes // routes based login
-  const handleClicked = () => {
+  const handleClicked = (e) => {
+    e.preventDefault();
     if (User && User.token) {
       navigate("/");
     } else {

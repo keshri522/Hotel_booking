@@ -35,7 +35,7 @@ const EditHotels = () => {
   const [show, Setshow] = useState("");
   const [preview, Setpreview] = useState("");
   useEffect(() => {
-    GetsingleHotel(User.token, hotelIds)
+    GetsingleHotel(hotelIds)
       .then((res) => {
         // console.log(res);
         res.data.toDate = new Date(res.data.toDate);
