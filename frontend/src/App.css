@@ -81,6 +81,13 @@
   color: black;
   opacity: 0.6;
 }
+/* for the payment page */
+.flexs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 @media (max-width: 320px) {
   .d-flex.flex-column.flex-sm-row {
     flex-direction: column;

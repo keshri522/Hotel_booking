@@ -6,8 +6,11 @@ import CryptoJS from "crypto-js";
 import { loggedInUser } from "../Redux/reducers/LoginUser";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation(); // route based login
+
   const dispatch = useDispatch();
   // for the state of the componets
   const [formData, SetformData] = useState({
@@ -65,7 +68,13 @@ const Login = () => {
           dispatch(loggedInUser(res.data));
           // add this res.data to reducx as well as local stroage then redirects
           toast.success("Login Sucessfully");
-          navigate("/");
+          // looking for route based redirect
+          if (location && location.state && location.state.from) {
+            // if the current path is present the navigate the user to previous paths
+            navigate(`${location.state.from}`);
+          } else {
+            navigate("/");
+          }
         }, 1000);
       }
       // setting the response  then redircts to login page once i got the response

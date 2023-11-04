@@ -273,7 +273,7 @@ const StripeBookHotel = async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${req.protocol}://${req.get("host")}/success`,
+      success_url: "http://localhost:3000/#/success",
       cancel_url: `${req.protocol}://${req.get("host")}/cancel`,
     });
     res.status(200).send({ url: response.url });

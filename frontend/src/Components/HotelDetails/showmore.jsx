@@ -52,7 +52,7 @@ const ShowmoreDetails = () => {
             console.log(err);
           });
       } else {
-        navigate("/login");
+        navigate("/login", { state: { from: "/details/RoyalHotelMalls" } }); // sending the actul path if user login he will be redircted to this page
       }
     } catch (error) {
       // Handle any errors here

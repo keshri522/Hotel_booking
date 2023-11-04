@@ -8,6 +8,7 @@ import NewHotels from "../Hotels/New";
 import { Route, Routes } from "react-router-dom";
 import EditHotels from "../auth/EditHotels";
 import ShowmoreDetails from "./../HotelDetails/showmore";
+import StripeSuccess from "../auth/StripeSuccess";
 const Paths = () => {
   return (
     <div>
@@ -20,6 +21,7 @@ const Paths = () => {
         <Route path="/hotels/new" element={<NewHotels />}></Route>
         <Route path="/details/:slug" element={<ShowmoreDetails />}></Route>
         <Route path="/seller/edit/:slug" element={<EditHotels />}></Route>
+        <Route path="/success" element={<StripeSuccess />}></Route>
       </Routes>
     </div>
   );
