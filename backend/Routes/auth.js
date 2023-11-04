@@ -14,6 +14,7 @@ const {
   loginUserHotels,
   deleteBookedHotel,
   singleHotel,
+  StripeBookHotel,
 } = require("../controllers/auth");
 router.post("/register", register);
 router.post("/login", login);
@@ -29,4 +30,6 @@ router.post("/deletehotel", authMiddleware, deleteHotel);
 router.get("/loginUserhotels", authMiddleware, loginUserHotels);
 router.post("/deleteBookedHotel", authMiddleware, deleteBookedHotel); // this will delete booked hotes by user
 router.post("/singlehotel", singleHotel);
+// this is stripe payment route
+router.post("/bookhotel", authMiddleware, StripeBookHotel); // this will
 module.exports = router;

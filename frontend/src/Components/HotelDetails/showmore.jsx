@@ -5,6 +5,7 @@ import DateFunctions from "../Functions/Date";
 import { useNavigate } from "react-router-dom";
 import GetsingleHotel from "../Functions/getsinglehotels";
 import moment from "moment";
+import StripeHotel from "../Functions/StripeHotek";
 const ShowmoreDetails = () => {
   const navigate = useNavigate();
   const User = useSelector((state) => state.rootReducers.userLogin); // this will give the current logged in user
@@ -39,26 +40,37 @@ const ShowmoreDetails = () => {
     }
   }, [hotelId, navigate, User]);
   // this functio will responsive for navigating user based on the routes // routes based login
-  const handleClicked = (e) => {
+  const handleClicked = async (e) => {
     e.preventDefault();
-    if (User && User.token) {
-      navigate("/");
-    } else {
-      navigate("/login");
+    try {
+      if (User && User.token) {
+        StripeHotel(User.token, hotels)
+          .then((res) => {
+            window.location.href = res.data.url; // the the stripe method url it will be sending from backend
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        navigate("/login");
+      }
+    } catch (error) {
+      // Handle any errors here
     }
   };
+
   return (
     <>
-      <div className="container_fluid p-4 m-1 bg-secondary text-center">
+      <div className="container_fluid p-3 m-1 bg-secondary text-center">
         <h2>{hotels.title}</h2>
       </div>
       {show ? (
-        <div className="container text-center mt-5">
+        <div className="container text-center mt-3">
           <h1 className="text-danger">...loading</h1>
           <p className="texts">Have patience Server might be slow!</p>
         </div>
       ) : (
-        <div className="container mt-4 ">
+        <div className="container mt-3 ">
           <div className="row">
             {hotels.images ? (
               <div className="col-md-6">
@@ -107,7 +119,7 @@ const ShowmoreDetails = () => {
 
                 <button
                   onClick={handleClicked}
-                  className="btn btn-outline-success w-100"
+                  className="btn btn-outline-success w-100 mb-4"
                 >
                   {/* added condtionlly showing of button based on token */}
                   {User && User.token ? "Book Hotel" : "Login to Book Hotel"}

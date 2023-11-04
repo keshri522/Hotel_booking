@@ -4,7 +4,7 @@ const User = require("../Modal/User");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config();
 const Hotel = require("../Modal/NewHotels");
-
+const stripe = require("stripe")(process.env.STRIPE_KEY); // this is stipe secret key onc we can acdces the payment
 const register = async (req, res) => {
   const { name, email, password, cpassword } = req.body;
   try {
@@ -252,7 +252,36 @@ const singleHotel = async (req, res) => {
     res.status(500).send("Internal Server Error"); // <-- Changed response message to a more generic error message
   }
 };
-
+// this function will create a connection between stripe and payment geteway
+const StripeBookHotel = async (req, res) => {
+  const { data } = req.body;
+  // console.log(data.price);
+  try {
+    const response = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "inr",
+            product_data: {
+              name: data.title,
+              images: [data.images], // this will show the image
+            },
+            unit_amount: data.price * 100, // to make it round figure
+          },
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      success_url: `${req.protocol}://${req.get("host")}/success`,
+      cancel_url: `${req.protocol}://${req.get("host")}/cancel`,
+    });
+    res.status(200).send({ url: response.url });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
 module.exports = {
   register,
   login,
@@ -263,4 +292,5 @@ module.exports = {
   loginUserHotels,
   deleteBookedHotel,
   singleHotel,
+  StripeBookHotel,
 };
