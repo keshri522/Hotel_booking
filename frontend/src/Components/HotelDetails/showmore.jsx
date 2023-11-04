@@ -38,7 +38,7 @@ const ShowmoreDetails = () => {
       });
     }
   }, [hotelId, navigate, User]);
-  // console.log(hotels);
+
   return (
     <>
       <div className="container_fluid p-4 m-1 bg-secondary text-center">
@@ -50,7 +50,7 @@ const ShowmoreDetails = () => {
           <p className="texts">Have patience Server might be slow!</p>
         </div>
       ) : (
-        <div className="container mt-4 card">
+        <div className="container mt-4 ">
           <div className="row">
             {hotels.images ? (
               <div className="col-md-6">
@@ -63,40 +63,47 @@ const ShowmoreDetails = () => {
             ) : (
               ""
             )}
-            <div className="col-md-6">
-              <b>{hotels.content}</b>
-              <p className="alert alert-info mt-3">Price: ${hotels.price}</p>
-              <p className="card-text texts">
-                for <span></span>
-                <span className="text-primary ">
-                  {/* this function will show the diffrence between from and to date in days */}
-                  {DateFunctions(hotels.fromDate, hotels.toDate)}
-                  {DateFunctions(hotels.fromDate, hotels.toDate) <= 1
-                    ? " day "
-                    : " days "}
-                </span>
-                <p>
-                  From <br />
-                  {/* here im am fromating the date with the help of moments libaray */}
-                  {moment(new Date(hotels.fromDate)).format(
-                    "MMM DD YYYY, HH:mm:ss a"
-                  )}
-                  <br />
-                  To <br />
-                  {/* here im am fromating the date with the help of moments libaray */}
-                  {moment(new Date(hotels.toDate)).format(
-                    "MMM DD YYYY, HH:mm:ss a"
-                  )}
+
+            {hotels.content ? (
+              <div className="col-md-6">
+                <b>{hotels.content}</b>
+                <p className="alert alert-info mt-3">Price: ${hotels.price}</p>
+                <p className="card-text texts">
+                  for <span></span>
+                  <span className="text-primary ">
+                    {/* this function will show the diffrence between from and to date in days */}
+                    {DateFunctions(hotels.fromDate, hotels.toDate)}
+                    {DateFunctions(hotels.fromDate, hotels.toDate) <= 1
+                      ? " day "
+                      : " days "}
+                  </span>
+                  <p>
+                    From <br />
+                    {/* here im am fromating the date with the help of moments libaray */}
+                    {moment(new Date(hotels.fromDate)).format(
+                      "MMM DD YYYY, HH:mm:ss a"
+                    )}
+                    <br />
+                    To <br />
+                    {/* here im am fromating the date with the help of moments libaray */}
+                    {moment(new Date(hotels.toDate)).format(
+                      "MMM DD YYYY, HH:mm:ss a"
+                    )}
+                  </p>
                 </p>
-              </p>
-              <h6>
-                <span className="text-primary ">PostedBy:</span>{" "}
-                {hotels.postedBy.name}
-              </h6>
-              <button className="btn btn-outline-success w-100">
-                Book Hotel
-              </button>
-            </div>
+
+                <h6>
+                  <span className="text-primary ">PostedBy:</span>{" "}
+                  {hotels.postedBy ? hotels.postedBy.name : "Unknown User"}
+                </h6>
+
+                <button className="btn btn-outline-success w-100">
+                  Book Hotel
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       )}
