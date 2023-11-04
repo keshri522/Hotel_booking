@@ -240,7 +240,7 @@ const singleHotel = async (req, res) => {
   const id = req.body.id;
 
   try {
-    let hotel = await Hotel.findById(id);
+    let hotel = await Hotel.findById(id).populate("postedBy", "name _id");
 
     if (hotel) {
       res.status(200).send(hotel);

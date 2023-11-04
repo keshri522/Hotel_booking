@@ -57,6 +57,10 @@ const BootstapCard = ({ hotel, handleDelete }) => {
                 <div className="col-md-4 mb-2 mb-md-0">
                   <button
                     onClick={() => {
+                      localStorage.setItem(
+                        "hotelId",
+                        JSON.stringify(hotel._id)
+                      );
                       navigate(`details/${hotel.title.split(" ").join("")}`, {
                         state: { data: hotel }, // sending the data of particular hotel
                       }); // removes spaces

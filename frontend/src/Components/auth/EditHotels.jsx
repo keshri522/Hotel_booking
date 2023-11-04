@@ -86,7 +86,7 @@ const EditHotels = () => {
     } catch (error) {
       setTimeout(() => {
         if (error && error.response && error.response.status === 400) {
-          toast.error("Please fill all the fields below");
+          toast.error("Please fill all the fields belows");
         }
         Setshow(false);
       }, 1000);
