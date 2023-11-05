@@ -21,20 +21,6 @@ const Home = () => {
   const handlePageChange = (page) => {
     Setpage(page);
   };
-  // const token = useSelector((state) => state.rootReducers.userLogin.token);
-  // // this function will the hotels
-  // const handleDelete = async (id) => {
-  //   try {
-  //     Setcheck(true);
-  //     let res = await DeleteHotel(token, id, page);
-  //     Sethotles(res.data);
-  //     Setcheck(true);
-  //     toast.success("Hotel deleted successfully");
-  //   } catch (error) {
-  //     Setcheck(false);
-  //     toast.error(error.message);
-  //   }
-  // };
 
   useEffect(() => {
     Gethotels(page)
@@ -84,7 +70,7 @@ const Home = () => {
       <div className="container-fluid text-center">
         <Pagination
           current={page}
-          total={Math.ceil(totalProuct / 3) * 10}
+          total={Math.ceil(totalProuct / 3) * 10} // show pagiantion based on the page number
           onChange={handlePageChange}
           className="text-center text-danger p-2 mb-1"
         ></Pagination>
