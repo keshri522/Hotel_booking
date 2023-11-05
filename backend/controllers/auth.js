@@ -135,41 +135,6 @@ const createHotels = async (req, res) => {
   }
 };
 
-// this api will update the current hotesl
-
-// const updatehotels = async (req, res) => {
-//   // note first check if the id coming in th body is already present then find make it update
-//   const id = req.body.data._id;
-
-//   try {
-//     // destructing the data coming from body
-//     const { title, content, price, bed, images, location, from, to } =
-//       req.body.data;
-//     if (id) {
-//       const find = await Hotel.findByIdAndUpdate(id, {
-//         title: title,
-//         content: content,
-//         price: price,
-//         bed: bed,
-//         images: images,
-//         location: location,
-//         fromDate: from,
-//         toDate: to,
-//         postedBy: req.user._id, // this id will come once jwt is verifed then add the in req.user
-//       });
-//       if (find) {
-//         res.status(200).send("true");
-//       } else {
-//         res.status(400).send("false");
-//       }
-//     } else {
-//       res.status(500).send("id not found");
-//     }
-//   } catch (error) {
-//     res.status(400).send(error);
-//   }
-// };
-
 const getHotels = async (req, res) => {
   const perpage = 3; // per page how many hotesl
   const CurrentPage = req.query.page || 1;
@@ -308,8 +273,8 @@ const StripeBookHotel = async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: "http://localhost:3000/#/success", // if payment is successful then redirect back to
-      cancel_url: "http://localhost:3000/#/error", // if payment is unsuccessful then redirect back to
+      success_url: "https://keshri522.github.io/Hotel_booking/#/success", // if payment is successful then redirect back to
+      cancel_url: "https://keshri522.github.io/Hotel_booking/#/error", // if payment is unsuccessful then redirect back to
     });
     res.status(200).send({ url: response.url }); // this url is urul of stri[e]
   } catch (error) {
