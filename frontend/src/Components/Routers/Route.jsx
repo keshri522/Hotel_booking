@@ -14,7 +14,7 @@ const Paths = () => {
   return (
     <div>
       <Routes>
-        <Route path="/Hotel_booking" element={<Home />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
