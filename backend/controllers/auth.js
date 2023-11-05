@@ -273,8 +273,10 @@ const StripeBookHotel = async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: "https://keshrihotelbooking.onrender.com/success", // if payment is successful then redirect back to
-      cancel_url: "https://keshrihotelbooking.onrender.com/error", // if payment is unsuccessful then redirect back to
+      success_url:
+        "https://6547d85310f7c97a031f0ab5--regal-custard-956ba9.netlify.app//success", // if payment is successful then redirect back to
+      cancel_url:
+        "https://6547d85310f7c97a031f0ab5--regal-custard-956ba9.netlify.app//error", // if payment is unsuccessful then redirect back to
     });
     res.status(200).send({ url: response.url }); // this url is urul of stri[e]
   } catch (error) {
