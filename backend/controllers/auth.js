@@ -90,7 +90,7 @@ const login = async (req, res) => {
 // now this is the controllers that will add functionality to form data or hotels coming from frontend
 const createHotels = async (req, res) => {
   // note first check if the id coming in th body is already present then find make it update
-  const { id } = req.body.data;
+  const id = req.body.data._id;
 
   try {
     // destructing the data coming from body
@@ -113,27 +113,46 @@ const createHotels = async (req, res) => {
       } else {
         res.status(400).send("false");
       }
+    } else {
+      res.status(500).send("id not found");
     }
-
-    // now saving to databbase
-    const Newhotels = new Hotel({
-      title: title,
-      content: content,
-      price: price,
-      bed: bed,
-      images: images,
-      location: location,
-      fromDate: from,
-      toDate: to,
-      postedBy: req.user._id, // this id will come once jwt is verifed then add the in req.user
-    });
-    //save the data in data base
-    await Newhotels.save();
-    res.status(200).send("true");
   } catch (error) {
     res.status(400).send(error);
   }
 };
+
+//   const { id } = req.body.data;
+
+//   try {
+//     const { title, content, price, bed, images, location, from, to } =
+//       req.body.data;
+
+//     if (id) {
+//       const updatedHotel = await Hotel.findByIdAndUpdate(id, {
+//         title: title,
+//         content: content,
+//         price: price,
+//         bed: bed,
+//         images: images,
+//         location: location,
+//         fromDate: from,
+//         toDate: to,
+//         postedBy: req.user._id,
+//       });
+
+//       if (updatedHotel) {
+//         res.status(200).send("true");
+//       } else {
+//         res.status(400).send("false");
+//       }
+//     } else {
+//       res.status(400).send("Missing ID in request body");
+//     }
+//   } catch (error) {
+//     res.status(400).send(error);
+//   }
+// };
+
 // this function will give all the holtels int the dataBase
 const getHotels = async (req, res) => {
   const perpage = 3; // per page how many hotesl

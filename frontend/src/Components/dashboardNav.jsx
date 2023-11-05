@@ -16,7 +16,7 @@ const DashboardNav = () => {
         </li>
         <li className="nav-item">
           <NavLink className="nav-link" to="/seller" activeClassName="active">
-            Your Booking
+            Your Posted Hotels
           </NavLink>
         </li>
       </ul>
