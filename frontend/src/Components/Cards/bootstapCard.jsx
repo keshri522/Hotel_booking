@@ -2,8 +2,6 @@ import React from "react";
 import DateFunctions from "../Functions/Date";
 import { useNavigate } from "react-router-dom";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 const BootstapCard = ({ hotel, handleDelete }) => {
   const navigate = useNavigate();
   //   console.log(hotel);

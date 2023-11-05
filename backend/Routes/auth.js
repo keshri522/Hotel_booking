@@ -14,6 +14,7 @@ const {
   loginUserHotels,
   deleteBookedHotel,
   singleHotel,
+
   StripeBookHotel,
 } = require("../controllers/auth");
 router.post("/register", register);
@@ -23,6 +24,7 @@ const authMiddleware = require("../middleware/auth");
 // create a post routes which will handle the stripe payouts
 // router.post("/create_connect_account", authMiddleware);
 router.post("/create_hotels", authMiddleware, createHotels);
+
 router.get("/getHotels", getHotels);
 router.get("/totalhotels", totalHotels);
 router.post("/deletehotel", authMiddleware, deleteHotel);
