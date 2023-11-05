@@ -52,7 +52,10 @@ Authorization: Certain routes and features are protected and only accessible to 
 ## Deployment Link
 - https://6547d85310f7c97a031f0ab5--regal-custard-956ba9.netlify.app/
 
-   ## Sometimes Server slow to take time to reload the products
+   ## Sometimes Server slow to take time to reload the hotels
+  -- backend deployed on render
+  - https://keshrihotelbooking.onrender.com/getHotels
+    
 
  
 ## Deployment
