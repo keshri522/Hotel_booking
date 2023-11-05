@@ -54,7 +54,7 @@ Authorization: Certain routes and features are protected and only accessible to 
 
    ## Sometimes Server slow to take time to reload the hotels
   -- backend deployed on render
-  - https://keshrihotelbooking.onrender.com/getHotels
+  - https://keshrihotelbooking.onrender.com/api/getHotels
     
 
  
