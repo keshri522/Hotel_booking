@@ -81,7 +81,8 @@ const Login = () => {
     } catch (error) {
       if (error && error.response && error.response.status === 400) {
         setTimeout(() => {
-          toast.error(`${error.response.data}`);
+          // toast.error(`${error.response.data}`);
+          toast.error("Invalid Credentials");
           Setspinner(false);
         }, 1000);
       }
@@ -107,7 +108,7 @@ const Login = () => {
         className="container-fluid mt-3   p-3 text-center"
       >
         <h1 className="text-white" style={{ textShadow: "2px  2px black" }}>
-          Welcome to Login
+          Welcome to Keshri Hotel
         </h1>
       </div>
       <div className="container mt-5">

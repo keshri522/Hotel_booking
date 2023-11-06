@@ -1,5 +1,6 @@
 import Spinner from "../Spinner/spinner";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const LoginForm = ({ formData, handleChange, handleClikc, spinner }) => {
   const navigate = useNavigate();
   return (
@@ -58,15 +59,20 @@ const LoginForm = ({ formData, handleChange, handleClikc, spinner }) => {
               Login
             </button>
           )}
-          <label
+          {/* <label
+            style={{ backgroundColor: "blue" }}
             type="button"
-            className="mt-2 tt"
+            className="mt-2 tt "
             onClick={() => {
               navigate("/register");
             }}
           >
             Don't have an account
-          </label>
+          </label> */}
+
+          <Link to="/register" style={{ color: "blue" }} className="mt-2 tt">
+            Don't have an account
+          </Link>
         </div>
       </div>
     </>
