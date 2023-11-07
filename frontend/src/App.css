@@ -88,6 +88,8 @@
   align-items: center;
   height: 100vh;
 }
+/* for the heading of the hotels */
+
 @media (max-width: 320px) {
   .d-flex.flex-column.flex-sm-row {
     flex-direction: column;
