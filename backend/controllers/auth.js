@@ -295,6 +295,21 @@ const StripeBookHotel = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+// this function will verify the opts from the databse once matched then redircet to login page
+const Optverification = async (req, res) => {
+  const { opt } = req.body;
+  try {
+    // if first find the opt in User collection
+    let verifiedopt = await User.find({ Otp: opt });
+    if (!verifiedopt) {
+      res.status(404).send("Invalid Opt please enter correct Opt");
+    } else {
+      res.status(200).send(true);
+    }
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
+};
 module.exports = {
   register,
   login,
@@ -306,4 +321,5 @@ module.exports = {
   deleteBookedHotel,
   singleHotel,
   StripeBookHotel,
+  Optverification,
 };
