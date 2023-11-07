@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { loggedInUser } from "../Redux/reducers/LoginUser";
-import { useSelector } from "react-redux";
+
 import Gethotels from "../Functions/GetHotles";
 import BootstapCard from "../Cards/bootstapCard";
 import { toast } from "react-toastify";
 import TotalProducts from "../Functions/TotalProducts";
-import DeleteHotel from "../Functions/Deletehotel";
-import { UseSelector } from "react-redux/es/hooks/useSelector";
+
 // pagination from ant design
 import { Pagination } from "antd";
+import LoadingSpinner from "../Loadingeffect/loading";
+import "../Loadingeffect/loading.css"; // this is the css file of the loading effect
 const Home = () => {
   const [hotels, Sethotles] = useState([]);
   const [show, Setshow] = useState(true); // Set show to true initially
@@ -52,13 +51,22 @@ const Home = () => {
 
   return (
     <>
-      <div className="container-fluid  text-center mt-1 p-2 bg-secondary">
-        <h2 className="text-white">All Hotels</h2>
-      </div>
+      {show ? (
+        <div className="container-fluid  text-center mt-1 p-2 bg-light">
+          <h3 className="text-danger">
+            Server might be slow have patience loading...
+          </h3>
+        </div>
+      ) : (
+        <div className="container-fluid  text-center mt-1 p-2 bg-secondary">
+          <h2 className="text-white">All Hotels</h2>
+        </div>
+      )}
       <div className="container">
         {show ? (
           <div className="load">
-            <h3 className="text-danger">...loading</h3>
+            {/* <h3 className="text-danger">...loading</h3> */}
+            <LoadingSpinner />
           </div>
         ) : (
           hotels.map((hotel) => (
