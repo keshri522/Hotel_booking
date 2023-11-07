@@ -19,6 +19,13 @@ const registerSchema = new mongoose.Schema(
       min: 6,
       max: 64,
     },
+    Otp: {
+      type: String,
+      required: true,
+      trim: true,
+      min: 6,
+      max: 64,
+    },
   },
   { timestamps: true } // Enable timestamps for createdAt and updatedAt
 );

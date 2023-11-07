@@ -4,9 +4,13 @@ const User = require("../Modal/User");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config();
 const Hotel = require("../Modal/NewHotels");
+const sendOtpEmail = require("../Nodemailer/nodemailer");
+const otpfunction = require("../Optgenerator/opt");
+
 const stripe = require("stripe")(process.env.STRIPE_KEY); // this is stipe secret key onc we can acdces the payment
 const register = async (req, res) => {
   const { name, email, password, cpassword } = req.body;
+  // console.log("the email is", email);
   try {
     // need to validate the data coming in the body
     if (!name) {
@@ -32,17 +36,26 @@ const register = async (req, res) => {
     }
     // after here i am using hashing the password save the hashed password to db
     const hashPassword = await bcrypt.hash(password, 12);
-
+    // genearting the random opt this wwill be save in to db
+    var opts = await otpfunction();
+    // console.log(opts);
+    req.user = opts; // addiong the opts to req.user that can be access any user in application
+    // calling this function that will send opt to req.body.email id
+    const check = await sendOtpEmail(req, res);
+    // console.log(check);
     // creating a new instance
     const newUser = new User({
       name: name,
       email: email,
       password: hashPassword,
+      Otp: opts, // saving the opt to databse of user collections
     });
     await newUser.save();
     res.status(200).send("User added Succefully");
+    // we need to send opt to given email
   } catch (error) {
-    // console.log(error);
+    // Handle errors
+    console.error(error);
     res.status(400).send(error.message);
   }
 };

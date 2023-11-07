@@ -75,6 +75,7 @@ const Register = () => {
           navigate("/login");
         }, 2000);
       }
+
       // setting the response  then redircts to login page once i got the response
     } catch (error) {
       if (error && error.response && error.response.status === 400) {
