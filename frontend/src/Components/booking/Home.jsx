@@ -25,7 +25,7 @@ const Home = () => {
     Gethotels(page)
       .then((res) => {
         Sethotles(res.data);
-        Setshow(false); // Set show to false after data is fetched
+        Setshow(true); // Set show to false after data is fetched
       })
       .catch((err) => {
         Setshow(false); // Set show to false in case of error
@@ -52,10 +52,8 @@ const Home = () => {
   return (
     <>
       {show ? (
-        <div className="container-fluid   text-center mt-1 p-2 bg-">
-          <h3 className="text-danger">
-            Server might be slow have patience loading...
-          </h3>
+        <div className="container-fluid   text-center mt-1 p-2 bg">
+          <b>Server might be slow have patience</b>
         </div>
       ) : (
         <div className="container-fluid  text-center mt-1 p-2 bg-secondary">
@@ -65,8 +63,9 @@ const Home = () => {
       <div className="container">
         {show ? (
           <div className="load">
-            {/* <h3 className="text-danger">...loading</h3> */}
-            <LoadingSpinner />
+            <div>
+              <LoadingSpinner />
+            </div>
           </div>
         ) : (
           hotels.map((hotel) => (

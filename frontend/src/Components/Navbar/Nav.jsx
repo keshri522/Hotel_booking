@@ -2,16 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Tooltip } from "antd";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { loggedOutUser } from "../Redux/reducers/LoginUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLinkedin,
-  faDashcube,
-  faGithub,
-} from "@fortawesome/free-brands-svg-icons";
+import { faLinkedin, faDashcube } from "@fortawesome/free-brands-svg-icons";
 const Nav = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const UserData = useSelector((state) => state.rootReducers.userLogin);
   // console.log(UserData);
@@ -65,21 +61,11 @@ const Nav = () => {
           Register
         </Link>
       )}
-      {/* <Tooltip title="Portfolio">
-        <Link style={{ fontSize: "1.5rem" }}>
-          <FontAwesomeIcon
-            className="size"
-            icon={faDashcube}
-            onClick={() => {
-              window.open("https://keshri522.github.io/Myportfolio/", "_blank");
-            }}
-          />
-        </Link>
-      </Tooltip> */}
+
       <Tooltip title="Linkdin">
         <Link style={{ fontSize: "1.5rem" }}>
           <FontAwesomeIcon
-            className="size"
+            className="size responsive"
             icon={faLinkedin}
             onClick={() => {
               window.open(

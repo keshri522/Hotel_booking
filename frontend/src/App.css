@@ -115,3 +115,10 @@
     width: 100%;
   }
 }
+
+/* // this is for the linkdin icons here if width is less than 500px then i want to disable the icons */
+@media (min-width: 322px) and (max-width: 500px) {
+  .responsive {
+    display: none !important;
+  }
+}
