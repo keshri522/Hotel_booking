@@ -25,7 +25,7 @@ const Home = () => {
     Gethotels(page)
       .then((res) => {
         Sethotles(res.data);
-        Setshow(true); // Set show to false after data is fetched
+        Setshow(false); // Set show to false after data is fetched
       })
       .catch((err) => {
         Setshow(false); // Set show to false in case of error
