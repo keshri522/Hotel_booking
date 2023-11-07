@@ -50,7 +50,7 @@ Authorization: Certain routes and features are protected and only accessible to 
 - dotenv
 
 ## Deployment Link
-- https://6547d85310f7c97a031f0ab5--regal-custard-956ba9.netlify.app/
+- https://keshri522.github.io/Hotel_booking/
 
    ## Sometimes Server slow to take time to reload the hotels
   -- backend deployed on render
