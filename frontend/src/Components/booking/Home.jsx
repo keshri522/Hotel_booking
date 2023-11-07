@@ -52,7 +52,7 @@ const Home = () => {
   return (
     <>
       {show ? (
-        <div className="container-fluid  text-center mt-1 p-2 bg-light">
+        <div className="container-fluid  text-center mt-1 p-2 bg-">
           <h3 className="text-danger">
             Server might be slow have patience loading...
           </h3>
