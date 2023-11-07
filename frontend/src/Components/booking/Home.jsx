@@ -52,7 +52,7 @@ const Home = () => {
   return (
     <>
       {show ? (
-        <div className="container-fluid  text-center mt-1 p-2 bg-">
+        <div className="container-fluid   text-center mt-1 p-2 bg-">
           <h3 className="text-danger">
             Server might be slow have patience loading...
           </h3>
@@ -74,15 +74,18 @@ const Home = () => {
           ))
         )}
       </div>
-
-      <div className="container-fluid text-center">
-        <Pagination
-          current={page}
-          total={Math.ceil(totalProuct / 3) * 10} // show pagiantion based on the page number
-          onChange={handlePageChange}
-          className="text-center text-danger p-2 mb-1"
-        ></Pagination>
-      </div>
+      {show ? (
+        ""
+      ) : (
+        <div className="container-fluid text-center">
+          <Pagination
+            current={page}
+            total={Math.ceil(totalProuct / 3) * 10} // show pagiantion based on the page number
+            onChange={handlePageChange}
+            className="text-center text-danger p-2 mb-1"
+          ></Pagination>
+        </div>
+      )}
     </>
   );
 };
