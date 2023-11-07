@@ -10,6 +10,7 @@ import EditHotels from "../auth/EditHotels";
 import ShowmoreDetails from "./../HotelDetails/showmore";
 import StripeSuccess from "../auth/StripeSuccess";
 import Stripeerror from "../auth/StripeError";
+import OTPVerification from "../OptPage/opt";
 const Paths = () => {
   return (
     <div>
@@ -24,6 +25,7 @@ const Paths = () => {
         <Route path="/seller/edit/:slug" element={<EditHotels />}></Route>
         <Route path="/success" element={<StripeSuccess />}></Route>
         <Route path="/error" element={<Stripeerror />}></Route>
+        <Route path="/optverification" element={<OTPVerification />}></Route>
       </Routes>
     </div>
   );

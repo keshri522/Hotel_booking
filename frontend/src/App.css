@@ -105,7 +105,13 @@
 .imageStyle:hover {
   transform: scale(1.06);
 }
-
+/* this is for the opt veryfication */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
 @media (max-width: 320px) {
   .d-flex.flex-column.justify-content-between {
     flex-direction: column;
