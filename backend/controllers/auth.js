@@ -297,16 +297,19 @@ const StripeBookHotel = async (req, res) => {
 };
 // this function will verify the opts from the databse once matched then redircet to login page
 const Optverification = async (req, res) => {
-  const { opt } = req.body;
+  const { data } = req.body;
+
   try {
     // if first find the opt in User collection
-    let verifiedopt = await User.find({ Otp: opt });
+    let verifiedopt = await User.find({ Otp: data });
     if (!verifiedopt) {
       res.status(404).send("Invalid Opt please enter correct Opt");
     } else {
       res.status(200).send(true);
     }
   } catch (error) {
+    // console.log(error);
+
     res.status(500).send("Internal Server Error");
   }
 };

@@ -20,12 +20,6 @@ const sendOtpEmail = async (req, res) => {
       text: `Hello, your OTP is: ${req.user}`,
       html: `<p>Your OTP is: <strong>${req.user}</strong></p>`,
     });
-
-    if (info && info.messageId) {
-      console.log("Message sent: %s", info.messageId);
-    } else {
-      console.error("Error sending email:", info);
-    }
   } catch (error) {
     console.error(error);
     throw new Error(error);

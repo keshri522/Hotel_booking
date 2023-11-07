@@ -33,7 +33,7 @@ router.post("/deletehotel", authMiddleware, deleteHotel);
 router.get("/loginUserhotels", authMiddleware, loginUserHotels);
 router.post("/deleteBookedHotel", authMiddleware, deleteBookedHotel); // this will delete booked hotes by user
 router.post("/singlehotel", singleHotel);
-router.post("/optverification", authMiddleware, Optverification); // this route will handle the opt verification by user from db
+router.post("/optverification", Optverification); // this route will handle the opt verification by user from db
 // this is stripe payment route
 router.post("/bookhotel", authMiddleware, StripeBookHotel); // this will
 module.exports = router;

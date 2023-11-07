@@ -71,9 +71,9 @@ const Register = () => {
       if (data.status === 200) {
         setTimeout(() => {
           Setspinner(false);
-          toast.success("Register Sucessfully");
-          navigate("/login");
-        }, 2000);
+          toast.success("Opt sent to this email plese enter the opt");
+          navigate("/optverification");
+        }, 1000);
       }
 
       // setting the response  then redircts to login page once i got the response
