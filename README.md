@@ -14,6 +14,11 @@ Authentication: Users can sign up and log in to their accounts. JWT is used to h
 
 Authorization: Certain routes and features are protected and only accessible to authenticated users.
 
+OTP Validation Only Genuine Email person Can log in to My app because once he SignUp a opt will be send to their Email Address
+
+Forgot Password Opt Verification Link will be Generate 
+
+For Providing Security to My node or epxress I have used A library called Helmet it removes the http:headers like in which technology my project is running also prevent from ClickJacking attacks
 
 ## Features
 - Login page
@@ -24,6 +29,8 @@ Authorization: Certain routes and features are protected and only accessible to 
 - view all hotels
 - Book hotels using Stripe
 - Edit hotels
+- OTP Validation
+- ForgotPassword validaton
 
 
 ## What I used in Frontend
@@ -48,6 +55,7 @@ Authorization: Certain routes and features are protected and only accessible to 
 - cors
 - Middleware
 - dotenv
+- helmet
 
 ## Deployment Link
 - https://keshri522.github.io/Hotel_booking/
