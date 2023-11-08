@@ -341,6 +341,22 @@ const ForgotPassword = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+// this funtion will verified the opt from ForgotPassword model
+const verifedOpt = async (req, res) => {
+  const { data } = req.body; // this is the opt coming from client side
+
+  try {
+    const checkOpt = await FogotModel.find({ Opt: data });
+    if (checkOpt.length === 0) {
+      res.status(404).send("OTP is Invalid");
+    } else {
+      res.status(200).send(true);
+    }
+  } catch (error) {
+    // console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
 module.exports = {
   register,
   login,
@@ -354,4 +370,5 @@ module.exports = {
   StripeBookHotel,
   Optverification,
   ForgotPassword,
+  verifedOpt,
 };

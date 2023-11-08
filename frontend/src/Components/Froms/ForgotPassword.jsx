@@ -63,7 +63,7 @@ const ForgotPassword = () => {
               <button
                 onClick={handleClick}
                 className="btn btn-outline-success mt-3 w-100"
-                // disabled={!emailRegex.test(email)}
+                disabled={!emailRegex.test(email)}
               >
                 Send Code
               </button>

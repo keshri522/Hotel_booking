@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import SendOpt from "../Functions/SendOpt";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const OTPVerificationForm = () => {
+  const navigate = useNavigate();
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [show, Setshow] = useState(false);
   const handleChange = (e, index) => {
@@ -23,12 +25,15 @@ const OTPVerificationForm = () => {
         setTimeout(() => {
           Setshow(false);
           toast.success("opt verified successfully");
+          navigate("/updatepassword");
         }, 1000);
       }
     } catch (error) {
       Setshow(false);
-      console.log(error);
+
+      // console.log(error);
       toast.error("please enter valid opt");
+      setOtp(["", "", "", "", "", ""]); // make it empty first
     }
   };
   return (

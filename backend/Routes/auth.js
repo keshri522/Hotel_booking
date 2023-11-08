@@ -17,6 +17,7 @@ const {
   Optverification,
   ForgotPassword,
   StripeBookHotel,
+  verifedOpt,
 } = require("../controllers/auth");
 router.post("/register", register);
 router.post("/login", login);
@@ -36,5 +37,6 @@ router.post("/singlehotel", singleHotel);
 router.post("/optverification", Optverification); // this route will handle the opt verification by user from db
 router.post("/forgotPassword", ForgotPassword); // this function will sned the opt to the user who want to forgot the password
 // this is stripe payment route
+router.post("/forgotoptVerification", verifedOpt); // this function will first verifiy the opt of forgot password
 router.post("/bookhotel", authMiddleware, StripeBookHotel); // this will
 module.exports = router;
