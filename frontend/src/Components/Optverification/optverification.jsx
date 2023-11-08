@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-
+import SendOpt from "../Functions/SendOpt";
+import { toast } from "react-toastify";
 const OTPVerificationForm = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const [show, Setshow] = useState(true);
+  const [show, Setshow] = useState(false);
   const handleChange = (e, index) => {
     const { value } = e.target;
     // first need to grasp all the previous values
@@ -11,8 +12,25 @@ const OTPVerificationForm = () => {
     setOtp(PrevValue);
   };
 
-  let item = otp.join(""); // combining into one will be send to backend for verification usin mongo db
-
+  let OTP = otp.join(""); // combining into one will be send to backend for verification usin mongo db
+  // this function will verify the opt in the backend
+  const hanldleClick = async (e) => {
+    Setshow(true);
+    e.preventDefault();
+    try {
+      const res = await SendOpt(OTP);
+      if (res.status === 200) {
+        setTimeout(() => {
+          Setshow(false);
+          toast.success("opt verified successfully");
+        }, 1000);
+      }
+    } catch (error) {
+      Setshow(false);
+      console.log(error);
+      toast.error("please enter valid opt");
+    }
+  };
   return (
     <div className="container margin">
       <div className="row justify-content-center">
@@ -34,12 +52,16 @@ const OTPVerificationForm = () => {
                 ))}
               </div>
               {show ? (
-                <button className="btn btn-primary w-100 mt-3">
-                  Verify OTP
+                <button className="btn btn-outline-primary w-100 mt-3">
+                  ...Verifying
                 </button>
               ) : (
-                <button className="btn btn-success w-100 mt-3">
-                  ...Verifying
+                <button
+                  disabled={OTP.length < 6}
+                  onClick={hanldleClick}
+                  className="btn btn-success w-100 mt-3"
+                >
+                  Verify OTP
                 </button>
               )}
             </div>
