@@ -15,7 +15,7 @@ const {
   deleteBookedHotel,
   singleHotel,
   Optverification,
-
+  ForgotPassword,
   StripeBookHotel,
 } = require("../controllers/auth");
 router.post("/register", register);
@@ -34,6 +34,7 @@ router.get("/loginUserhotels", authMiddleware, loginUserHotels);
 router.post("/deleteBookedHotel", authMiddleware, deleteBookedHotel); // this will delete booked hotes by user
 router.post("/singlehotel", singleHotel);
 router.post("/optverification", Optverification); // this route will handle the opt verification by user from db
+router.post("/forgotPassword", ForgotPassword); // this function will sned the opt to the user who want to forgot the password
 // this is stripe payment route
 router.post("/bookhotel", authMiddleware, StripeBookHotel); // this will
 module.exports = router;

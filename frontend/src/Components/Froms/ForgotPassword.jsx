@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ForgotPasswordApi from "../Functions/ForgotPassword";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const ForgotPassword = () => {
+  const navigate = useNavigate();
   // for the state management
   const [show, Setshow] = useState(false);
   const [email, Setemail] = useState();
@@ -9,7 +11,7 @@ const ForgotPassword = () => {
     const { value } = e.target;
     Setemail(value);
   };
-  console.log(email);
+
   // this function will send the vlaues of onchange to the backend and verified the opt
   const handleClick = async (e) => {
     Setshow(true);
@@ -20,7 +22,8 @@ const ForgotPassword = () => {
         setTimeout(() => {
           Setshow(false);
           toast.success("Check your email to reset your password");
-        }, 1000);
+          navigate("/optverified"); // once done navigate to otp verifed field
+        }, 2000);
       }
     } catch (error) {
       Setshow(false);

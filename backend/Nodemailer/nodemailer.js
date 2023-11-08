@@ -21,7 +21,7 @@ const sendOtpEmail = async (req, res) => {
       html: `<p>Your OTP is: <strong>${req.user}</strong></p>`,
     });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     throw new Error(error);
   }
 };

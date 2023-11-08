@@ -6,7 +6,7 @@ const dotenv = require("dotenv").config();
 const Hotel = require("../Modal/NewHotels");
 const sendOtpEmail = require("../Nodemailer/nodemailer");
 const otpfunction = require("../Optgenerator/opt");
-
+const FogotModel = require("../Modal/ForgotPassword");
 const stripe = require("stripe")(process.env.STRIPE_KEY); // this is stipe secret key onc we can acdces the payment
 const register = async (req, res) => {
   const { name, email, password, cpassword } = req.body;
@@ -61,7 +61,7 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  console.log(process.env.JWTSECRET);
+  // console.log(process.env.JWTSECRET);
   // console.log(req.body);
 
   // then sent a jwt token to user
@@ -314,6 +314,32 @@ const Optverification = async (req, res) => {
   }
 };
 // this function  will generate opt in the Forgot password collection
+const ForgotPassword = async (req, res) => {
+  const { data } = req.body;
+  console.log(data);
+  try {
+    // i need to firt verfiy the email comig from the data is valid or not
+    const EmailVerifcation = await User.find({ email: data });
+    if (!EmailVerifcation) {
+      res.status(404).send("Email is Invalid");
+    } else {
+      // i will send or call the opt generator function which will send otp to the given mail
+      var opts = await otpfunction();
+      // console.log(opts);
+      req.user = opts; // addiong the opts to req.user that can be access any user in application
+      // calling this function that will send opt to req.body.email id
+      const check = await sendOtpEmail(req, res);
+      // i need to save that opt to forgot model
+      const newData = new FogotModel({
+        Opt: opts,
+      });
+      await newData.save(); // saving to the databse futher we have to verify
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
 module.exports = {
   register,
   login,
@@ -326,4 +352,5 @@ module.exports = {
   singleHotel,
   StripeBookHotel,
   Optverification,
+  ForgotPassword,
 };
