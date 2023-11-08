@@ -9,6 +9,7 @@ const ForgotPassword = () => {
     const { value } = e.target;
     Setemail(value);
   };
+  console.log(email);
   // this function will send the vlaues of onchange to the backend and verified the opt
   const handleClick = async (e) => {
     Setshow(true);
@@ -51,14 +52,14 @@ const ForgotPassword = () => {
                 onClick={handleClick}
                 className="btn btn-outline-success mt-3 w-100"
               >
-                Send Code
+                ...Sending Opt
               </button>
             ) : (
               <button
                 onClick={handleClick}
                 className="btn btn-outline-success mt-3 w-100"
               >
-                ...Sending Opt
+                Send Code
               </button>
             )}
           </div>

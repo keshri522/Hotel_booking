@@ -313,6 +313,7 @@ const Optverification = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+// this function  will generate opt in the Forgot password collection
 module.exports = {
   register,
   login,
