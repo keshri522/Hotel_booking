@@ -1,8 +1,32 @@
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import ForgotPasswordApi from "../Functions/ForgotPassword";
+import { toast } from "react-toastify";
 const ForgotPassword = () => {
   // for the state management
-
+  const [show, Setshow] = useState(false);
+  const [email, Setemail] = useState();
+  const handleChange = (e) => {
+    const { value } = e.target;
+    Setemail(value);
+  };
+  // this function will send the vlaues of onchange to the backend and verified the opt
+  const handleClick = async (e) => {
+    Setshow(true);
+    e.preventDefault();
+    try {
+      let res = await ForgotPasswordApi(email);
+      if (res.status === 200) {
+        setTimeout(() => {
+          Setshow(false);
+          toast.success("Check your email to reset your password");
+        }, 1000);
+      }
+    } catch (error) {
+      Setshow(false);
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  };
   return (
     <>
       <div className="container-fluid bg-secondary">
@@ -20,10 +44,23 @@ const ForgotPassword = () => {
               placeholder="Enter your email to send an opt"
               className="form-control p-2 texts text-center"
               style={{ border: "none", borderBottom: "2px solid green" }}
+              onChange={handleChange}
             />
-            <button className="btn btn-outline-success mt-3 w-100">
-              Send Code
-            </button>
+            {show ? (
+              <button
+                onClick={handleClick}
+                className="btn btn-outline-success mt-3 w-100"
+              >
+                Send Code
+              </button>
+            ) : (
+              <button
+                onClick={handleClick}
+                className="btn btn-outline-success mt-3 w-100"
+              >
+                ...Sending Opt
+              </button>
+            )}
           </div>
         </div>
       </div>
