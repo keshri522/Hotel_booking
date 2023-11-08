@@ -15,21 +15,37 @@ const ForgotPassword = () => {
   const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   // this function will send the vlaues of onchange to the backend and verified the opt
   const handleClick = async (e) => {
+    // addig this email to the locatstoage to any wheer can access
+    localStorage.setItem("email", email);
     Setshow(true);
     e.preventDefault();
     try {
-      let res = await ForgotPasswordApi(email);
+      const res = await ForgotPasswordApi(email);
       if (res.status === 200) {
         setTimeout(() => {
           Setshow(false);
-          toast.success("Check your email to reset your password");
-          navigate("/optverified"); // once done navigate to otp verifed field
-        }, 2000);
+          toast.success("opt verified successfully");
+          navigate("/optverified");
+        }, 1000);
       }
     } catch (error) {
       Setshow(false);
-      console.log(error);
-      toast.error("Something went wrong");
+      Setshow(true);
+      e.preventDefault();
+      try {
+        let res = await ForgotPasswordApi(email);
+        if (res.status === 200) {
+          setTimeout(() => {
+            Setshow(false);
+            toast.success("Check your email to reset your password");
+            navigate("/optverified"); // once done navigate to otp verifed field
+          }, 2000);
+        }
+      } catch (error) {
+        Setshow(false);
+        console.log(error);
+        toast.error("Something went wrong");
+      }
     }
   };
   return (
@@ -63,7 +79,7 @@ const ForgotPassword = () => {
               <button
                 onClick={handleClick}
                 className="btn btn-outline-success mt-3 w-100"
-                disabled={!emailRegex.test(email)}
+                disabled={!emailRegex.test(email)} // unitl verifed then only enables
               >
                 Send Code
               </button>

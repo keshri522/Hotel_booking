@@ -13,6 +13,7 @@ import Stripeerror from "../auth/StripeError";
 import OTPVerification from "../OptPage/opt";
 import InputComponent from "../Optverification/optverification";
 import ForgotPassword from "../Froms/ForgotPassword";
+import UpdatePassword from "../Froms/UpdatePassword";
 const Paths = () => {
   return (
     <div>
@@ -30,6 +31,7 @@ const Paths = () => {
         <Route path="/optverification" element={<OTPVerification />}></Route>
         <Route path="/optverified" element={<InputComponent />}></Route>
         <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
+        <Route path="/updatepassword" element={<UpdatePassword />}></Route>
       </Routes>
     </div>
   );
