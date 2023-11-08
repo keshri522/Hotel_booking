@@ -68,13 +68,19 @@ const Register = () => {
       );
       // console.log(data);
 
-      if (data.status === 200) {
-        setTimeout(() => {
-          Setspinner(false);
-          toast.success("Opt sent to this email plese enter the opt");
-          navigate("/optverification");
-        }, 1000);
-      }
+      // if (data.status === 200) {
+      //   setTimeout(() => {
+      //     Setspinner(false);
+      //     toast.success("Opt sent to this email plese enter the opt");
+      //     navigate("/optverification");
+      //   }, 1000);
+      // }
+
+      setTimeout(() => {
+        Setspinner(false);
+        toast.success("Opt sent to this email plese enter the opt");
+        navigate("/optverification");
+      }, 2000);
 
       // setting the response  then redircts to login page once i got the response
     } catch (error) {

@@ -8,7 +8,8 @@ const sendOtpEmail = require("../Nodemailer/nodemailer");
 const otpfunction = require("../Optgenerator/opt");
 const FogotModel = require("../Modal/ForgotPassword");
 const stripe = require("stripe")(process.env.STRIPE_KEY); // this is stipe secret key onc we can acdces the payment
-const register = async (req, res) => {
+let datas; // for globally acces of the data
+const register = async (req, res, Userdata) => {
   const { name, email, password, cpassword } = req.body;
   // console.log("the email is", email);
   try {
@@ -44,13 +45,22 @@ const register = async (req, res) => {
     const check = await sendOtpEmail(req, res);
     // console.log(check);
     // creating a new instance
-    const newUser = new User({
+    // const newUser = new User({
+    //   name: name,
+    //   email: email,
+    //   password: hashPassword,
+    //   Otp: opts, // saving the opt to databse of user collections
+    // });
+
+    // await newUser.save();
+    datas = {
+      // assining the data to global variable
       name: name,
       email: email,
-      password: hashPassword,
-      Otp: opts, // saving the opt to databse of user collections
-    });
-    await newUser.save();
+      password: hashPassword, // You might want to reconsider storing the plain password
+      Otp: opts,
+    };
+
     res.status(200).send("User added Succefully");
     // we need to send opt to given email
   } catch (error) {
@@ -296,7 +306,7 @@ const StripeBookHotel = async (req, res) => {
   }
 };
 // this function will verify the opts from the databse once matched then redircet to login page
-const Optverification = async (req, res) => {
+const Optverification = async (req, res, Userdata) => {
   const { data } = req.body;
 
   try {
@@ -305,7 +315,16 @@ const Optverification = async (req, res) => {
     if (!verifiedopt) {
       res.status(404).send("Invalid Opt please enter correct Opt");
     } else {
+      let newUser = new User({
+        // saving the details of the user once opt is verified
+        name: datas.name,
+        email: datas.email,
+        password: datas.password,
+        Otp: datas.Otp,
+      });
+      await newUser.save(); // this will save all the register details to db once opts is verifed
       res.status(200).send(true);
+      // saving the  data to db all the details like name and email and  hassed password or opts in user collection
     }
   } catch (error) {
     // console.log(error);
