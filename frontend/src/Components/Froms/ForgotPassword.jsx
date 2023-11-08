@@ -12,6 +12,7 @@ const ForgotPassword = () => {
     Setemail(value);
   };
 
+  const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   // this function will send the vlaues of onchange to the backend and verified the opt
   const handleClick = async (e) => {
     Setshow(true);
@@ -49,6 +50,7 @@ const ForgotPassword = () => {
               className="form-control p-2 texts text-center"
               style={{ border: "none", borderBottom: "2px solid green" }}
               onChange={handleChange}
+              required
             />
             {show ? (
               <button
@@ -61,6 +63,7 @@ const ForgotPassword = () => {
               <button
                 onClick={handleClick}
                 className="btn btn-outline-success mt-3 w-100"
+                // disabled={!emailRegex.test(email)}
               >
                 Send Code
               </button>
