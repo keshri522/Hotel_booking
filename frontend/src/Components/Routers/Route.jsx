@@ -11,6 +11,8 @@ import ShowmoreDetails from "./../HotelDetails/showmore";
 import StripeSuccess from "../auth/StripeSuccess";
 import Stripeerror from "../auth/StripeError";
 import OTPVerification from "../OptPage/opt";
+import InputComponent from "../Optverification/optverification";
+import ForgotPassword from "../Froms/ForgotPassword";
 const Paths = () => {
   return (
     <div>
@@ -26,6 +28,8 @@ const Paths = () => {
         <Route path="/success" element={<StripeSuccess />}></Route>
         <Route path="/error" element={<Stripeerror />}></Route>
         <Route path="/optverification" element={<OTPVerification />}></Route>
+        <Route path="/optverified" element={<InputComponent />}></Route>
+        <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
       </Routes>
     </div>
   );

@@ -6,20 +6,6 @@ const LoginForm = ({ formData, handleChange, handleClikc, spinner }) => {
   return (
     <>
       <div>
-        {/* <div className="form-floating mb-3 ">
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            className="form-control"
-            placeholder="Enter your name"
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="floatingPassword">
-            Name<span className="text-danger">*</span>
-          </label>
-        </div> */}
         <div className="form-floating mb-3">
           <input
             type="email"
@@ -59,20 +45,18 @@ const LoginForm = ({ formData, handleChange, handleClikc, spinner }) => {
               Login
             </button>
           )}
-          {/* <label
-            style={{ backgroundColor: "blue" }}
-            type="button"
-            className="mt-2 tt "
-            onClick={() => {
-              navigate("/register");
-            }}
-          >
-            Don't have an account
-          </label> */}
-
-          <Link to="/register" style={{ color: "blue" }} className="mt-2 tt">
-            Don't have an account
-          </Link>
+          <div className="d-flex justify-content-between">
+            <Link to="/register" style={{ color: "blue" }} className="mt-2 tt">
+              Don't have an account
+            </Link>
+            <Link
+              to="/forgotPassword"
+              style={{ color: "red", fontWeight: "bold" }}
+              className="mt-2 tt"
+            >
+              Forgot password
+            </Link>
+          </div>
         </div>
       </div>
     </>

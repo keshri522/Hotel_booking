@@ -63,7 +63,11 @@ const OTPVerification = () => {
                   />
                 </div>
                 {/* condtilally rendering of button based on the state */}
-                <button type="submit" className="btn btn-primary w-100">
+                <button
+                  disabled={otp.length < 6}
+                  type="submit"
+                  className="btn btn-primary w-100"
+                >
                   {show ? "Verifying.." : "  Verify OTP"}
                 </button>
               </form>

@@ -105,6 +105,9 @@
 .imageStyle:hover {
   transform: scale(1.06);
 }
+.margin {
+  margin-top: 12rem;
+}
 /* this is for the opt veryfication */
 .center {
   display: flex;
