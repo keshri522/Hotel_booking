@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-
+import CryptoJS from "crypto-js";
+import updatePasswrod from "../Functions/UpdatePassword";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 const ForgotPassword = () => {
@@ -49,8 +50,30 @@ const ForgotPassword = () => {
         toast.error("Password and confirm Password should be same");
         return;
       }
+      // here hasing the password no one can see in the payload
+      const hashedPassword = CryptoJS.SHA256(data.password).toString();
+      const chashedPassword = CryptoJS.SHA256(data.Cpassword).toString();
+      // once form validation is done need to call the api which will send the data for the backend
+      const DATA = {
+        // hasng the password
+        // seding this to the backend
+        email: email,
+        password: hashedPassword,
+        Cpassword: chashedPassword,
+      };
+      Setshow(true);
+      const res = await updatePasswrod(DATA);
+      if (res.status === 200) {
+        setTimeout(() => {
+          toast.success("Password updated successfully");
+          navigate("/login");
+          Setshow(false);
+        }, 1000);
+      }
     } catch (error) {
-      toast.error(error);
+      Setshow(false);
+      //   console.log(error);
+      toast.error("Something went wrong");
     }
     // addig this email to the locatstoage to any wheer can access
   };
@@ -93,7 +116,9 @@ const ForgotPassword = () => {
               required
             />
             {show ? (
-              <button>...Updating</button>
+              <button className="btn btn-outline-warning mt-3 w-100">
+                ...Updating
+              </button>
             ) : (
               <button
                 onClick={handleClick}
