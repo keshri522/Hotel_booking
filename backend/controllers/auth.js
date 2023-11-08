@@ -316,10 +316,10 @@ const Optverification = async (req, res) => {
 // this function  will generate opt in the Forgot password collection
 const ForgotPassword = async (req, res) => {
   const { data } = req.body;
-  console.log(data);
   try {
     // i need to firt verfiy the email comig from the data is valid or not
     const EmailVerifcation = await User.find({ email: data });
+    req.body.email = EmailVerifcation[0].email; // assiging to the req.body.email first vrerify the email then
     if (!EmailVerifcation) {
       res.status(404).send("Email is Invalid");
     } else {
@@ -334,6 +334,7 @@ const ForgotPassword = async (req, res) => {
         Opt: opts,
       });
       await newData.save(); // saving to the databse futher we have to verify
+      res.status(200).send("Otp sent successfully");
     }
   } catch (error) {
     console.log(error);

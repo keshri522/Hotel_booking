@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 const sendOtpEmail = async (req, res) => {
-  //   console.log("the details are", req.user, req.body.email);
+  // console.log("the details are", req.user, req.body.email);
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.elasticemail.com",
@@ -21,7 +21,7 @@ const sendOtpEmail = async (req, res) => {
       html: `<p>Your OTP is: <strong>${req.user}</strong></p>`,
     });
   } catch (error) {
-    // console.error(error);
+    console.error(error);
     throw new Error(error);
   }
 };
