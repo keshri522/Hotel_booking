@@ -10,12 +10,14 @@ const morgan = require("morgan");
 const router = require("./Routes/auth");
 // Database connection
 const Database = require("./Database/databaseConnection");
-
+// for providing security credentials
+const helmet = require("helmet");
 // middleware
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true })); // enable json reader to the server coming from body
 app.use(cors()); // that will allow to send the data from diffrent origins
 app.use(morgan("tiny")); // this will all the info of the api
+app.use(helmet());
 // separate routes that will run only on the given endpoints
 app.use("/api", router);
 
