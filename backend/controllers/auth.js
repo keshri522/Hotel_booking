@@ -357,6 +357,46 @@ const verifedOpt = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+// this contoller will update the password of thev user while in the forgot password
+const UpdatePassword = async (req, res) => {
+  const { data } = req.body;
+
+  try {
+    // need to validate the data coming in the body
+
+    if (!data.email) {
+      return res.status(400).send("Email is Required");
+    }
+    if (!data.password || data.password.length < 6) {
+      return res
+        .status(400)
+        .send(
+          "Password must be at least 6 char with one letter and special character"
+        );
+    }
+    if (data.password !== data.Cpassword) {
+      return res.status(400).send("Password and confirm Password must be same");
+    }
+    // let me check if user if already present in db
+    const existUser = await User.findOne({ email: data.email });
+    if (!existUser) {
+      res.status(404).send("This User is not Registered");
+    }
+    // after here i am using hashing the password save the hashed password to db
+    const hashPassword = await bcrypt.hash(data.password, 12);
+
+    // update the databsee to mongodb
+
+    existUser.password = hashPassword; // updating the password of current user
+    await existUser.save();
+    // saving the new password with the user
+    res.status(200).send("Password updated successfully");
+    /// saving the hashed password or email to the db
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+};
 module.exports = {
   register,
   login,
@@ -371,4 +411,5 @@ module.exports = {
   Optverification,
   ForgotPassword,
   verifedOpt,
+  UpdatePassword,
 };

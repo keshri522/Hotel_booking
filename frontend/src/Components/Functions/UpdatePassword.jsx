@@ -4,7 +4,7 @@ import axios from "axios";
 const ForgotPasswordApi = async (data) => {
   const response = await axios.post(
     `${process.env.REACT_APP_REACT_API_URL}/updatePasswrod`,
-    { data: data }
+    { data }
   );
   return response;
 };

@@ -46,7 +46,11 @@ const LoginForm = ({ formData, handleChange, handleClikc, spinner }) => {
             </button>
           )}
           <div className="d-flex justify-content-between">
-            <Link to="/register" style={{ color: "blue" }} className="mt-2 tt">
+            <Link
+              to="/register"
+              style={{ color: "tan", fontWeight: "bold" }}
+              className="mt-2 tt"
+            >
               Don't have an account
             </Link>
             <Link

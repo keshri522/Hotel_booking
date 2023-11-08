@@ -39,7 +39,7 @@ const ForgotPassword = () => {
             Setshow(false);
             toast.success("Check your email to reset your password");
             navigate("/optverified"); // once done navigate to otp verifed field
-          }, 2000);
+          }, 1000);
         }
       } catch (error) {
         Setshow(false);
@@ -73,7 +73,7 @@ const ForgotPassword = () => {
                 onClick={handleClick}
                 className="btn btn-outline-success mt-3 w-100"
               >
-                ...Sending Opt
+                ...Sending Otp
               </button>
             ) : (
               <button
